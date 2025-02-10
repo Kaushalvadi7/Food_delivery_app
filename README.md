@@ -49,8 +49,7 @@
 ## 📞 Contact & Support
   - For any queries or issues, reach out:
   - 📧 Email: kaushalvadi7777@gmail.com 
-  - 🌐 GitHub: Kaushalvadi7
-
+  - 🌐 GitHub: [Kaushalvadi7](https://github.com/Kaushalvadi7)  
 
 
 
