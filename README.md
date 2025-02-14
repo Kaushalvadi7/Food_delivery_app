@@ -1,10 +1,9 @@
 # 🍔 Flutter Food Delivery App :
-🚀 A modern and user-friendly food delivery application built with Flutter, That allows users to browse restaurants, add food items to the cart, change their delivery address, and place orders. The app features a clean UI, authentication system, and seamless navigation.
+🚀 🚀 A modern Flutter-based food delivery app with user authentication.The home screen features a **category tab** where users can browse items like **Pizza, Burger, Dessert, etc.** Each item includes a **detailed description** and **add-on options** for customization. Users can easily add/remove items from the cart, update their delivery address, and make secure payments via credit card. The app also features a **responsive UI, smooth navigation, and all essential food delivery features** for a seamless ordering experience.
 
 ## ✨ Features :
 
 - User Authentication: Sign up and log in using email and password.
-- Browse Restaurants: View a list of restaurants and their menus.
 - Add to Cart: Users can add and remove food items from the cart.
 - Change Address: Easily update the delivery address during checkout.
 - Smooth UI: Uses Flutter widgets like SliverAppBar, MyButton, etc.
