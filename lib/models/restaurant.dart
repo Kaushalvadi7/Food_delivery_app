@@ -14,9 +14,9 @@ class Restaurant extends ChangeNotifier{
         price: 159,
         category: FoodCategory.burgers,
         availableAddons: [
-          Addon(name: "Extra Cheese", price: 50),
-          Addon(name: "Bacon", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Extra Cheese", price: 20),
+          Addon(name: "Bacon", price: 30),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
     Food(name:"Blue Moon Burger" ,
         description: "Indulge in a flavor adventure with the Blue Moon Burger. Creamy blue cheese sauce, crispy bacon, and peppery arugula offer an exciting combination that’s rich, smoky, and perfectly balanced.",
@@ -24,9 +24,9 @@ class Restaurant extends ChangeNotifier{
         price: 199,
         category: FoodCategory.burgers,
         availableAddons: [
-          Addon(name: "Extra Cheese", price: 50),
-          Addon(name: "Bacon", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Extra Cheese", price: 20),
+          Addon(name: "Bacon", price: 30),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
     Food(name:"BBQ Burger" ,
         description: "This isn't just any burger; it's a smoky masterpiece. Slow-cooked barbecue sauce, caramelized onions, and a generous helping of tangy pickles create a flavor explosion in every bite.",
@@ -34,9 +34,9 @@ class Restaurant extends ChangeNotifier{
         price: 229,
         category: FoodCategory.burgers,
         availableAddons: [
-          Addon(name: "Extra Cheese", price: 50),
-          Addon(name: "Bacon", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Extra Cheese", price: 20),
+          Addon(name: "Bacon", price: 30),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
     Food(name:"Ultimate Cheeseburger" ,
         description: "For the ultimate cheese lover, this burger is a dream come true. A blend of sharp cheddar, creamy brie, and tangy blue cheese offers a decadent, cheesy explosion in every bite.",
@@ -44,9 +44,9 @@ class Restaurant extends ChangeNotifier{
         price: 189,
         category: FoodCategory.burgers,
         availableAddons: [
-          Addon(name: "Extra Cheese", price: 50),
-          Addon(name: "Bacon", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Extra Cheese", price: 20),
+          Addon(name: "Bacon", price: 30),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
     Food(name:"Veg Burger" ,
         description: "This Veg Burger is a celebration of fresh, vibrant flavors. With a juicy plant-based patty, crisp lettuce, tomato, and a creamy avocado spread, it’s a satisfying choice for both vegetarians and meat lovers alike.",
@@ -54,9 +54,9 @@ class Restaurant extends ChangeNotifier{
         price: 119,
         category: FoodCategory.burgers,
         availableAddons: [
-          Addon(name: "Extra Cheese", price: 50),
-          Addon(name: "Bacon", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Extra Cheese", price: 20),
+          Addon(name: "Bacon", price: 30),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
 
     //pizzas
@@ -130,9 +130,9 @@ class Restaurant extends ChangeNotifier{
         price: 199,
         category: FoodCategory.salads,
         availableAddons: [
-          Addon(name: "Roasted Nuts", price: 50),
-          Addon(name: "Croutons", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Roasted Nuts", price: 30),
+          Addon(name: "Croutons", price: 40),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
     Food(name:"Quinoa Salad" ,
         description: "Protein-packed quinoa with fresh veggies, nuts, and a light lemon vinaigrette for a healthy bite.",
@@ -140,9 +140,9 @@ class Restaurant extends ChangeNotifier{
         price: 179,
         category: FoodCategory.salads,
         availableAddons: [
-          Addon(name: "Roasted Nuts", price: 50),
-          Addon(name: "Croutons", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Roasted Nuts", price: 30),
+          Addon(name: "Croutons", price: 40),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
     Food(name:"Asian Sesame Salad" ,
         description: "A refreshing mix of crisp greens, crunchy almonds, and sesame seeds, tossed in a tangy sesame dressing.",
@@ -150,9 +150,9 @@ class Restaurant extends ChangeNotifier{
         price: 239,
         category: FoodCategory.salads,
         availableAddons: [
-          Addon(name: "Roasted Nuts", price: 50),
-          Addon(name: "Croutons", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Roasted Nuts", price: 30),
+          Addon(name: "Croutons", price: 40),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
     Food(name:"Caesar Salad" ,
         description: "Classic romaine lettuce with parmesan, crunchy croutons, and creamy Caesar dressing.",
@@ -160,9 +160,9 @@ class Restaurant extends ChangeNotifier{
         price: 179,
         category: FoodCategory.salads,
         availableAddons: [
-          Addon(name: "Roasted Nuts", price: 50),
-          Addon(name: "Croutons", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Roasted Nuts", price: 30),
+          Addon(name: "Croutons", price: 40),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
     Food(name:"Greek Salad" ,
         description: "A Mediterranean delight with cucumbers, tomatoes, feta cheese, olives, and a zesty olive oil dressing.",
@@ -170,9 +170,9 @@ class Restaurant extends ChangeNotifier{
         price: 189,
         category: FoodCategory.salads,
         availableAddons: [
-          Addon(name: "Roasted Nuts", price: 50),
-          Addon(name: "Croutons", price: 70),
-          Addon(name: "Extra Avocado", price: 100),
+          Addon(name: "Roasted Nuts", price: 30),
+          Addon(name: "Croutons", price: 40),
+          Addon(name: "Extra Avocado", price: 50),
         ]),
 
     //sides
@@ -183,9 +183,9 @@ class Restaurant extends ChangeNotifier{
         price: 199,
         category: FoodCategory.sides,
         availableAddons: [
-          Addon(name: "Extra Chilli Flakes", price: 50),
-          Addon(name: "Spicy Mayo", price: 70),
-          Addon(name: "Extra Cheese", price: 100),
+          Addon(name: "Extra Chilli Flakes", price: 20),
+          Addon(name: "Spicy Mayo", price: 30),
+          Addon(name: "Extra Cheese", price: 40),
         ]),
     Food(name:"Loaded Fries" ,
         description: "Crispy fries topped with gooey cheese, jalapeños, and a drizzle of flavorful sauces for the ultimate",
@@ -193,9 +193,9 @@ class Restaurant extends ChangeNotifier{
         price: 159,
         category: FoodCategory.sides,
         availableAddons: [
-          Addon(name: "Extra Chilli Flakes", price: 50),
-          Addon(name: "Spicy Mayo", price: 70),
-          Addon(name: "Extra Cheese", price: 100),
+          Addon(name: "Extra Chilli Flakes", price: 20),
+          Addon(name: "Spicy Mayo", price: 30),
+          Addon(name: "Extra Cheese", price: 40),
         ]),
     Food(name:"Mac Sides" ,
         description: "Creamy, cheesy macaroni with a rich, buttery texture—perfect as a comforting side dish.",
@@ -203,9 +203,9 @@ class Restaurant extends ChangeNotifier{
         price: 179,
         category: FoodCategory.sides,
         availableAddons: [
-          Addon(name: "Extra Chilli Flakes", price: 50),
-          Addon(name: "Spicy Mayo", price: 70),
-          Addon(name: "Extra Cheese", price: 100),
+          Addon(name: "Extra Chilli Flakes", price: 20),
+          Addon(name: "Spicy Mayo", price: 30),
+          Addon(name: "Extra Cheese", price: 40),
         ]),
     Food(name:"Onion Rings" ,
         description: "Crispy, golden-fried onion rings with a light crunch, served with a zesty dipping sauce.",
@@ -213,9 +213,9 @@ class Restaurant extends ChangeNotifier{
         price: 149,
         category: FoodCategory.sides,
         availableAddons: [
-          Addon(name: "Extra Chilli Flakes", price: 50),
-          Addon(name: "Spicy Mayo", price: 70),
-          Addon(name: "Extra Cheese", price: 100),
+          Addon(name: "Extra Chilli Flakes", price: 20),
+          Addon(name: "Spicy Mayo", price: 30),
+          Addon(name: "Extra Cheese", price: 40),
         ]),
     Food(name:"Sweet Potato" ,
         description: "Perfectly baked or fried sweet potato wedges, lightly seasoned for a sweet and savory treat.",
@@ -223,9 +223,9 @@ class Restaurant extends ChangeNotifier{
         price: 139,
         category: FoodCategory.sides,
         availableAddons: [
-          Addon(name: "Extra Chilli Flakes", price: 30),
-          Addon(name: "Spicy Mayo", price: 70),
-          Addon(name: "Extra Cheese", price: 100),
+          Addon(name: "Extra Chilli Flakes", price: 20),
+          Addon(name: "Spicy Mayo", price: 30),
+          Addon(name: "Extra Cheese", price: 40),
         ]),
 
     //desserts
@@ -235,10 +235,10 @@ class Restaurant extends ChangeNotifier{
         price: 200,
         category: FoodCategory.desserts,
         availableAddons: [
-          Addon(name: "Extra Nuts", price: 50),
-          Addon(name: "Chocolate Syrup", price: 70),
-          Addon(name: "Whipped Cream", price: 100),
-          Addon(name: "Caramel Drizzle", price: 100),
+          Addon(name: "Extra Nuts", price: 20),
+          Addon(name: "Chocolate Syrup", price: 30),
+          Addon(name: "Whipped Cream", price: 30),
+          Addon(name: "Caramel Drizzle", price: 40),
         ]),
     Food(name:"Cheesecake" ,
         description: "Indulge in a creamy, velvety slice of heaven. This cheesecake boasts a rich, smooth texture with just the right amount of sweetness, set atop a buttery, crumbly base. It’s the perfect way to end any meal.",
@@ -246,10 +246,10 @@ class Restaurant extends ChangeNotifier{
         price: 180,
         category: FoodCategory.desserts,
         availableAddons: [
-          Addon(name: "Extra Nuts", price: 50),
-          Addon(name: "Chocolate Syrup", price: 70),
-          Addon(name: "Whipped Cream", price: 100),
-          Addon(name: "Caramel Drizzle", price: 100),
+          Addon(name: "Extra Nuts", price: 20),
+          Addon(name: "Chocolate Syrup", price: 30),
+          Addon(name: "Whipped Cream", price: 30),
+          Addon(name: "Caramel Drizzle", price: 40),
         ]),
     Food(name:"Tiramisu" ,
         description: "A delicate Italian classic, Tiramisu layers rich coffee-soaked ladyfingers with a luscious mascara cream, dusted with cocoa powder for a flavor experience that’s both rich and light at the same time.",
@@ -257,10 +257,10 @@ class Restaurant extends ChangeNotifier{
         price: 159,
         category: FoodCategory.desserts,
         availableAddons: [
-          Addon(name: "Extra Nuts", price: 50),
-          Addon(name: "Choco Chips", price: 70),
-          Addon(name: "Whipped Cream", price: 100),
-          Addon(name: "Extra Cocoa Powder Dusting", price: 100),
+          Addon(name: "Extra Nuts", price: 30),
+          Addon(name: "Choco Chips", price: 30),
+          Addon(name: "Whipped Cream", price: 30),
+          Addon(name: "Extra Cocoa Powder Dusting", price: 30),
         ]),
     Food(name:"Gulab Jamun" ,
         description: "Soft, spongy, and soaked in aromatic sugar syrup, our Gulab Jamun offers the perfect blend of sweetness and warmth. A traditional Indian dessert that’s melt-in-your-mouth good.",
@@ -268,9 +268,9 @@ class Restaurant extends ChangeNotifier{
         price: 129,
         category: FoodCategory.desserts,
         availableAddons: [
-          Addon(name: "Rose Petals", price: 50),
-          Addon(name: "Vanilla Ice Cream", price: 70),
-          Addon(name: "Chopped Pistachios", price: 100),
+          Addon(name: "Rose Petals", price: 20),
+          Addon(name: "Vanilla Ice Cream", price: 20),
+          Addon(name: "Chopped Pistachios", price: 30),
         ]),
     Food(name:"Fruit Tart" ,
         description: "A refreshing and vibrant treat, the Fruit Tart features a crisp, buttery pastry crust filled with creamy custard, topped with a colorful assortment of fresh, juicy fruits. A delightful balance of sweetness and tartness.",
@@ -278,10 +278,10 @@ class Restaurant extends ChangeNotifier{
         price: 199,
         category: FoodCategory.desserts,
         availableAddons: [
-          Addon(name: "Extra Nuts", price: 50),
-          Addon(name: "Honey Drizzle", price: 70),
-          Addon(name: "Whipped Cream", price: 100),
-          Addon(name: "Caramel Drizzle", price: 100),
+          Addon(name: "Extra Nuts", price: 20),
+          Addon(name: "Chocolate Syrup", price: 30),
+          Addon(name: "Whipped Cream", price: 30),
+          Addon(name: "Caramel Drizzle", price: 40),
         ]),
 
     //drinks
@@ -304,7 +304,7 @@ class Restaurant extends ChangeNotifier{
         availableAddons: [
           Addon(name: "Extra Ice", price: 20),
           Addon(name: "Honey Drizzle", price: 30),
-          Addon(name: "Lemon Zest", price: 50),
+          Addon(name: "Lemon Zest", price: 30),
         ]),
     Food(name:"Mango Lassi" ,
         description: "A creamy, rich yogurt-based mango smoothie, blending sweet mangoes with a hint of cardamom.",
@@ -314,7 +314,7 @@ class Restaurant extends ChangeNotifier{
         availableAddons: [
           Addon(name: "Extra Ice", price: 20),
           Addon(name: "Honey Drizzle", price: 30),
-          Addon(name: "Lemon Zest", price: 50),
+          Addon(name: "Lemon Zest", price: 30),
         ]),
     Food(name:"Lemon Mint Cooler" ,
         description: "A zesty fusion of fresh lemon juice, cooling mint, and sparkling soda for the ultimate thirst quencher.",
@@ -405,20 +405,6 @@ void removeFromCart(CartItem cartItem){
   notifyListeners();
 }
 
-//get total price of cart
-double getTotalPrice(){
-  double total =0.0;
-
-  for(CartItem cartItem in _cart){
-    double itemTotal = cartItem.food.price;
-
-    for(Addon addon in cartItem.selectAddons){
-      itemTotal += addon.price;
-    }
-    total += itemTotal * cartItem.quantity;
-  }
-  return total;
-}
 
 //get total number of item in cart
 int getTotalItemCount(){
@@ -445,6 +431,33 @@ void clearCart(){
 /*
 H E L P E R S
  */
+
+  // Get subtotal (sum of all item prices in the cart)
+  double getSubtotal() {
+    double subtotal = 0.0;
+    for (CartItem cartItem in _cart) {
+      double itemTotal = cartItem.food.price;
+
+      // Include add-ons price
+      for (Addon addon in cartItem.selectAddons) {
+        itemTotal += addon.price;
+      }
+
+      subtotal += itemTotal * cartItem.quantity;
+    }
+    return subtotal;
+  }
+
+// Get tax amount (5% tax)
+  double getTax() {
+    return getSubtotal() * 0.05; // 5% of subtotal
+  }
+
+// Get final total (Subtotal + Tax)
+  double getTotalPrice() {
+    return getSubtotal() + getTax();
+  }
+
 
 //generate   receipt
 

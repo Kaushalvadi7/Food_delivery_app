@@ -60,9 +60,22 @@ class _FoodPageState extends State<FoodPage> {
     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,),),
 
     // food price
-    Text("₹${widget.food.price}"
-    ,style: TextStyle(fontSize: 16,
-    color: Theme.of(context).colorScheme.primary),),
+      Container(
+          padding: const EdgeInsets.symmetric(
+              horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            '₹${widget.food.price}',
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+          ),
 
     const SizedBox(height: 10,),
     // food description
@@ -96,15 +109,33 @@ class _FoodPageState extends State<FoodPage> {
     Addon addon  = widget.food.availableAddons[index];
     //return checkbox ui
     return CheckboxListTile(
-    title: Text(addon.name),
-    subtitle: Text("₹${addon.price}",
-    style: TextStyle(color: Theme.of(context).colorScheme.primary),),
-    value: widget.selectedAddons[addon],
-    onChanged: (bool? value) {
-    setState(() {
-    widget.selectedAddons[addon] =value!;
-    });
-    },
+      title: Text(addon.name),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(right: 300),
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+              horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            color:
+            Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            '₹${addon.price}',
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      value: widget.selectedAddons[addon],
+      onChanged: (bool? value) {
+        setState(() {
+          widget.selectedAddons[addon] = value!;
+        });
+      },
     );
     }),
     ),

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/components/my_drawer_tile.dart';
+import 'package:food_delivery_app/services/auth/login_or_registration.dart';
 
-import '../pages/login_page.dart';
 import '../pages/setting_page.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -63,7 +63,7 @@ class MyDrawer extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginPage(onTap: () {}),
+                    builder: (context) => LoginOrRegister(),
                   ),
                       (route) => false,
                 );
