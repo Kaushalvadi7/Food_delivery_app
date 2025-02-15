@@ -55,3 +55,4 @@ android {
 flutter {
     source = "../.."  // Make sure this points to the correct source location
 }
+

@@ -360,7 +360,10 @@ class Restaurant extends ChangeNotifier{
   List<Food> get menu => _menu;
   List<CartItem> get cart => _cart;
   String get deliveryAddress => _deliveryAddress;
+  int get cartItemsCount => _cart.length;
+
 /*
+Operations
 */
 
   
@@ -416,23 +419,7 @@ int getTotalItemCount(){
   return totalItemCount;
 }
 
-//clear cart
-void clearCart(){
-  _cart.clear();
-  notifyListeners();
-}
-
-// update delivery address
-  void updateDeliveryAddress(String newAddress) {
-  _deliveryAddress = newAddress;
-  notifyListeners();
-  }
-
-/*
-H E L P E R S
- */
-
-  // Get subtotal (sum of all item prices in the cart)
+// Get subtotal (sum of all item prices in the cart)
   double getSubtotal() {
     double subtotal = 0.0;
     for (CartItem cartItem in _cart) {
@@ -459,6 +446,23 @@ H E L P E R S
   }
 
 
+//clear cart
+void clearCart(){
+  _cart.clear();
+  notifyListeners();
+}
+
+// update delivery address
+  void updateDeliveryAddress(String newAddress) {
+  _deliveryAddress = newAddress;
+  notifyListeners();
+  }
+
+/*
+H E L P E R S
+ */
+
+
 //generate   receipt
 
   String displayCartReceipt(){
@@ -466,11 +470,13 @@ H E L P E R S
     receipt.write("Here's your receipt.");
     receipt.writeln();
   //format the date to include up ot seconds only
-String formattedDate = DateFormat('yyyy-MM-dd HH:mm;ss').format(DateTime.now());
+    String formattedDate =
+    DateFormat('yyyy-MM-dd HH:mm;ss').format(DateTime.now());
 
   receipt.writeln(formattedDate);
   receipt.writeln();
   receipt.writeln("-----------");
+
 
   for(final cartItem in cart) {
     receipt.writeln("${cartItem.quantity} x ${cartItem.food.name} -${_formatPrice(cartItem.food.price)}");
@@ -479,18 +485,13 @@ String formattedDate = DateFormat('yyyy-MM-dd HH:mm;ss').format(DateTime.now());
     }
     receipt.writeln();
   }
-
     receipt.writeln("-----------");
-    receipt.writeln();
-    receipt.writeln("Total Items: ${getTotalItemCount()}");
-    receipt.writeln("Total Price: ${_formatPrice(getTotalPrice())}");
-
-  return receipt.toString();
+    return receipt.toString();
 
   }
  // format double value into money
 String _formatPrice(double price){
-  return "₹${price.toStringAsFixed(2)}";
+  return "(₹${price.toStringAsFixed(2)})";
 }
 
 //format list of addons in to a string summary

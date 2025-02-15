@@ -64,7 +64,7 @@ class _PaymentPageState extends State<PaymentPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
                 Lottie.asset(
-                'assets/animation/food_delivery.json',
+                'assets/animation/food_delivery_animation.json',
                 width: 400,
                 height: 400,
                 repeat: false,
