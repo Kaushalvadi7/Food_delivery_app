@@ -17,10 +17,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
+  // Controls for toggling password visibility.
+  bool _isPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
+
   //register method
   void register() async {
     //get auth service
-    final authService = AuthService();
+    final AuthService authService = AuthService();
 
     // check if passwords match -> create user
     if (passwordController.text == confirmPasswordController.text) {
@@ -35,7 +39,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ));
       }
     }
-      // if passwords don.t match -> show error
+      // if passwords don't match -> show error
         else {
            showDialog(context: context, builder: (context) => AlertDialog(
              backgroundColor: Theme.of(context).colorScheme.surface,
@@ -56,22 +60,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // App logo
-                Icon(
-                  Icons.person_2,
-                  size: 100,
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                ),
+                Image.asset('assets/images/logo.png',
+                    height: 150,
+                    width: 200),
 
-                const SizedBox(height: 25),
-
-                //message,app slogan
+                //message
                 Text("Let's create an account for you",
                   style: TextStyle(
                     fontSize: 16,
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 15),
 
                 // email text field
                 MyTextField(
@@ -79,24 +79,73 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   hintText:" Enter your Email",
                   obscureText: false,
                 ),
-                const SizedBox(height: 25,),
+                const SizedBox(height: 15,),
 
-                //password
-                MyTextField(
-                  controller: passwordController,
-                  hintText:" Enter your Password",
-                  obscureText: true,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: !_isPasswordVisible,
+                    decoration: InputDecoration(
+                      hintText: "Enter Password",
+                      hintStyle:TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          color: _isPasswordVisible ? Colors.blue : Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+
+                // Confirm Password text field with eye icon
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextField(
+                    controller: confirmPasswordController,
+                    obscureText: !_isConfirmPasswordVisible,
+                    decoration: InputDecoration(
+                      hintText: "Re-Enter your Password",
+                      hintStyle:TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          color: _isConfirmPasswordVisible ? Colors.blue : Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                          });
+                        },
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+                      ),
+                    ),
+                  ),
                 ),
 
-                const SizedBox(height: 25,),
-                //confirm password
-                MyTextField(
-                  controller: confirmPasswordController,
-                  hintText:" Re-Enter your Password",
-                  obscureText: true,
-                ),
-
-                const SizedBox(height: 25,),
+                const SizedBox(height: 15,),
 
                 //Register up button
                 MyButton(
@@ -122,7 +171,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ],
                 )
-
               ],
             ),
           ),

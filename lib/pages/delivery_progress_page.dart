@@ -5,8 +5,9 @@ import 'package:food_delivery_app/services/database/firestore.dart';
 import 'package:provider/provider.dart';
 
 class DeliveryProgressPage extends StatefulWidget {
-  const DeliveryProgressPage({super.key});
+  final String paymentMethod;
 
+  const DeliveryProgressPage({super.key, required this.paymentMethod});
   @override
   State<DeliveryProgressPage> createState() => _DeliveryProgressPageState();
 }
@@ -14,102 +15,51 @@ class DeliveryProgressPage extends StatefulWidget {
 class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
 
   //get access to db
-  FirestoreService db = FirestoreService();
+  final FirestoreService db = FirestoreService();
+  late String receipt;
+  late String finalPaymentMethod;
 
   @override
   void initState(){
     super.initState();
 
-    //if we get to this page, submit order to firestore db
-    String receipt = context.read<Restaurant>().displayCartReceipt();
-    db.saveOrderToDatabase(receipt);
+    // Assign payment method properly
+    finalPaymentMethod = widget.paymentMethod.trim().isNotEmpty
+        ? widget.paymentMethod
+        : "Not Provided";
+
+    debugPrint("Payment Method in DeliveryProgressPage (initState): $finalPaymentMethod");
+
+    // Get the receipt from the restaurant provider
+    receipt = context.read<Restaurant>().displayCartReceipt();
+    // Save the order to Firestore with correct parameters
+    db.saveOrderToDatabase(receipt, finalPaymentMethod);
   }
+
   @override
   Widget build(BuildContext context) {
+    debugPrint("Payment Method in DeliveryProgressPage (build): $finalPaymentMethod");
+
     return Scaffold(
       appBar: AppBar(
+        title: const Text("Order Progress", style: TextStyle(
+            color:Colors.grey
+        ),),
+        centerTitle: true,
         backgroundColor: Colors.transparent,
       ),
-      bottomNavigationBar: _buildBottomNavBar (context),
-      body: SingleChildScrollView (
-        child: Column(
-          children: [
-            MyReceipt(),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Pass both receipt and paymentMethod correctly
+              MyReceipt(receipt: receipt, paymentMethod: finalPaymentMethod),
+            ],
+          ),
         ),
       ),
     );
   }
-
-    //Custom Bottom Nav Bar -Message /Call delivery driver
-    Widget _buildBottomNavBar(BuildContext context){
-      return Container(
-        height: 100,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(40),
-            topRight: Radius.circular(40),
-          )
-        ),
-        padding: const EdgeInsets.all(25),
-        child: Row(
-          children: [
-           //profile pic of driver
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(onPressed: () {} ,
-                  icon: const Icon(Icons.person)),
-            ),
-            const SizedBox(width: 10,),
-
-            // driver details
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Rahul Sharma",style: TextStyle(fontWeight: FontWeight.bold,
-                fontSize: 18,
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                ),),
-                Text("Driver" ,style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                ),),
-              ],
-            ),
-              const Spacer(),
-            Row(
-              children: [
-                // message button
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(onPressed: () {} ,
-                      icon: const Icon(Icons.message),
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-
-                const SizedBox(width: 10,),
-
-                //call button
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(onPressed: () {} ,
-                      icon: const Icon(Icons.phone)),
-                ),
-              ],
-            )
-            //message
-          ],
-        ) ,
-      );
-    }
 }

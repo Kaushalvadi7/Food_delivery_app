@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/components/my_button.dart';
 import 'package:food_delivery_app/components/my_textfield.dart';
@@ -20,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   // get instance of auth service
-  final AuthService _authService =AuthService();
+  final AuthService _authService = AuthService();
   bool _isPasswordVisible = false;
 
   @override
@@ -44,51 +43,44 @@ class _LoginPageState extends State<LoginPage> {
 
 
   // Email login method
-  void login() async{
-    // Check if a user is already logged in
-    if (FirebaseAuth.instance.currentUser != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("You're already logged in.")),
+  void login() async {
+    try {
+      await _authService.signInWithEmailPassword(
+        emailController.text,
+        passwordController.text,
       );
-      return;
-    }
-    // proceed with login
-    final authService = AuthService();
-    try{
-      await authService .signInWithEmailPassword(emailController.text,
-          passwordController.text);
-
-      // Navigate to the home page after successful login
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
-
-    }
-    //display any errors
-    catch (e) {
-      showDialog(context: context, builder: (context) => AlertDialog(
-        title: Text(e.toString()),
-      ));
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Login Failed"),
+          content: Text(e.toString()),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("OK"),
+            ),
+          ],
+        ),
+      );
     }
   }
 
   // Google login method
   void googleLogin() async {
     try {
-      print("🔹 Google Login Button Clicked");
       final user = await _authService.loginWithGoogle();
       if (user != null) {
-        print("✅ Google Login Successful: ${user.user?.email}");
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
         );
-      } else {
-        print("❌ Google Sign-In was cancelled");
       }
     } catch (e) {
-      print("❌ Google login failed: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Google login failed: ${e.toString()}")),
       );
@@ -127,21 +119,21 @@ class _LoginPageState extends State<LoginPage> {
 
               //password
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: TextField(
                   controller: passwordController,
                   obscureText: !_isPasswordVisible,
                   decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
-                    ),
                   hintText:" Enter your Password",
                   hintStyle:TextStyle(
                   color: Theme.of(context).colorScheme.inversePrimary
                   ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+                    ),
                   suffixIcon: IconButton(
                   icon: Icon(
                   _isPasswordVisible? Icons.visibility : Icons.visibility_off,
@@ -156,19 +148,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              // Forgot Password (Clickable Text)
-              // GestureDetector(
-              //   onTap: forgotpassword,
-              //   child: Text(
-              //     "Forgot Password?",
-              //     style: TextStyle(
-              //       color: Theme.of(context).colorScheme.inversePrimary,
-              //       fontSize: 14,
-              //       fontWeight: FontWeight.bold,
-              //       decoration: TextDecoration.underline, // Optional: Adds underline for better visibility
-              //     ),
-              //   ),
-              // ),
 
               const SizedBox(height: 15,),
 
@@ -203,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                 onTap: googleLogin,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 20, horizontal: 125),
+                      vertical: 20, horizontal: 175),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(13),
                     color: Theme.of(context).colorScheme.secondary,

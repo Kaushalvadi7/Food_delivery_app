@@ -9,11 +9,10 @@ plugins {
 }
 
 android {
-    namespace 'com.example.food_delivery_app'
-    namespace 'com.simform.flutter_credit_card'
-    compileSdkVersion 34
-    namespace = "com.example.food_delivery_app"  // Ensure the namespace is correctly set here
-    compileSdk = flutter.compileSdkVersion
+    namespace "com.example.food_delivery_app"  // ✅ Corrected: Only one namespace
+
+    compileSdkVersion 34  // ✅ Corrected: Only one compileSdkVersion
+
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -26,15 +25,11 @@ android {
     }
 
     defaultConfig {
-
-
         applicationId "com.example.food_delivery_app"
         minSdkVersion 23
-        //noinspection OldTargetApi
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
-
     }
 
     buildTypes {
@@ -43,16 +38,11 @@ android {
         }
     }
 
-    // Add buildFeatures block (optional)
     buildFeatures {
         viewBinding true
     }
-
-    // Add necessary dependencies or configurations for your project
-    // If you're using certain features, you can configure them here, such as Flavors, etc.
 }
 
 flutter {
-    source = "../.."  // Make sure this points to the correct source location
+    source = "../.."  // ✅ No change needed
 }
-

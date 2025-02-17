@@ -15,12 +15,12 @@ class MyTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // padding: EdgeInsets.only(top:10),
-      child: TabBar(
+    return TabBar(
+          labelColor:Theme.of(context).colorScheme.primary, // Selected tab text color
+          unselectedLabelColor: Theme.of(context).colorScheme.inversePrimary, // Unselected tab text color
+          indicatorColor: Colors.orange,
           controller: tabController,
           tabs: _buildCategoryTabs(),
-      ),
-    );
+      );
   }
 }

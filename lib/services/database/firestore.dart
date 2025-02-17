@@ -6,11 +6,11 @@ class FirestoreService {
   FirebaseFirestore.instance.collection('orders');
 
   //save order to db
-Future<void> saveOrderToDatabase(String receipt) async {
+Future<void> saveOrderToDatabase(String receipt, String paymentMethod) async {
   await orders.add({
     'date': DateTime.now(),
-  'order': receipt,
-  //add more fields as necesary
+    'order': receipt,
+    'paymentMethod': paymentMethod,
   });
 }
 }

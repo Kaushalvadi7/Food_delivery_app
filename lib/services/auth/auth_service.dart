@@ -43,16 +43,12 @@ class AuthService {
     return _firebaseAuth.currentUser;
   }
 
-  //sign in
+  //sign in with Email & Password
   Future<UserCredential> signInWithEmailPassword(String email, String password) async {
     //try sign  user in
     try {
-      //sign user in
-      UserCredential userCredential =
-      await _firebaseAuth.signInWithEmailAndPassword(
+      return await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-
-      return userCredential;
     } on FirebaseAuthException catch(e) {
       throw Exception(_getAuthErrorMessage(e));
     }
@@ -66,11 +62,10 @@ class AuthService {
       UserCredential userCredential =
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email,
-          password: password);
+          password: password,);
 
       // Send email verification
       await userCredential.user?.sendEmailVerification();
-
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw Exception(_getAuthErrorMessage(e));

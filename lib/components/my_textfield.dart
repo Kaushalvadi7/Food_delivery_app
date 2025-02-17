@@ -20,7 +20,7 @@ class MyTextField extends StatelessWidget {
         obscureText: obscureText,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
+            borderRadius: BorderRadius.circular(5),
           ),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),

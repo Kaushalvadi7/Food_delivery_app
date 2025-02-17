@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Image.asset(
               'assets/images/logo.png', // Animated splash
               width: 200,
-              height: 200,
+              height: 150,
               fit: BoxFit.contain,
             ),
             const SizedBox(height: 20),

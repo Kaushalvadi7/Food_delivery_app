@@ -5,7 +5,7 @@ buildscript {
     }
     dependencies {
         // Make sure you are using AGP 7.4.0 or later
-        classpath 'com.android.tools.build:gradle:8.2.2'
+        classpath 'com.android.tools.build:gradle:8.2.1'
         // If you're using Kotlin, ensure you have the correct version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
         classpath 'com.google.gms:google-services:4.4.2'
@@ -28,4 +28,3 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
-

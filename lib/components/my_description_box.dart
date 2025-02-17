@@ -36,7 +36,6 @@ class MyDescriptionBox extends StatelessWidget {
           ),
         ],
       ),
-      
     );
   }
 }

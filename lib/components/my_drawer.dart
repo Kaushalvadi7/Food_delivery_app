@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/components/my_drawer_tile.dart';
 import 'package:food_delivery_app/services/auth/login_or_registration.dart';
-
+import '../pages/home_page.dart';
 import '../pages/setting_page.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -17,10 +17,8 @@ class MyDrawer extends StatelessWidget {
           //app logo
           Padding(
             padding: const EdgeInsets.only(top: 100.0),
-            child: Icon(
-              Icons.lock_open_rounded,
-              size: 80,
-            ),
+            child: Image.asset('assets/images/logo.png',
+            width: 200,height: 100,)
           ),
 
           Padding(
@@ -34,7 +32,15 @@ class MyDrawer extends StatelessWidget {
           MyDrawerTile(
             text:"H O M E ",
             icon: Icons.home,
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>  HomePage(),
+                ),
+              );
+             }
           ),
 
           //setting list tile

@@ -37,7 +37,7 @@ class _PaymentPageState extends State<PaymentPage> {
         actions: [
           // cancel button
           TextButton(onPressed: () => Navigator.pop(context),
-              child:  const  Text("Cansel")),
+              child:  const  Text("Cancel")),
           // Confirm payment button
           TextButton(
             onPressed: () {
@@ -46,7 +46,6 @@ class _PaymentPageState extends State<PaymentPage> {
             },
             child: const Text("Yes"),
           ),
-
         ],
       ),
       );
@@ -83,7 +82,7 @@ class _PaymentPageState extends State<PaymentPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const DeliveryProgressPage(),
+          builder: (context) => const DeliveryProgressPage(paymentMethod: 'Credit Card',),
         ),
       );
     });

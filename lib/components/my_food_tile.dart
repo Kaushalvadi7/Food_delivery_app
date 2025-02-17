@@ -23,7 +23,7 @@ import 'package:food_delivery_app/models/food.dart';
                   //food image
                   ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(food.imagePath,height: 120,width: 120,fit: BoxFit.cover)),
+                      child: Image.asset(food.imagePath,height: 150,width: 150,fit: BoxFit.cover)),
 
                   const SizedBox(width: 15,),
                   //text food details

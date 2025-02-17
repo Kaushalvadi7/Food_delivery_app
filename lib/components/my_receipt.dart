@@ -6,7 +6,15 @@ import '../pages/home_page.dart';
 import 'my_button.dart';
 
 class MyReceipt extends StatelessWidget {
-  const MyReceipt({super.key});
+  final String paymentMethod;
+  final String receipt;
+
+  const MyReceipt({
+    super.key,
+    required this.paymentMethod,
+    required this.receipt,
+  });
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +35,13 @@ class MyReceipt extends StatelessWidget {
               const Text(
                 "Thank you for your order!",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
-                color: Colors.grey),
+                ),
               ),
               const SizedBox(height: 25),
 
               Text(
                 "Estimated delivery time: $formattedTime",
-                style: const TextStyle(fontSize: 16 , color: Colors.grey),
+                style: const TextStyle(fontSize: 16 ),
               ),
               const SizedBox(height: 20),
 
@@ -50,11 +58,6 @@ class MyReceipt extends StatelessWidget {
                       builder: (context, restaurant, child) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Delivery Address: ${restaurant.deliveryAddress}",
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 10),
                           Text(restaurant.displayCartReceipt()),
 
               // Order Summary Section
@@ -70,8 +73,18 @@ class MyReceipt extends StatelessWidget {
                             "Total: ₹${restaurant.getTotalPrice()}",
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
+                          const SizedBox(height: 10),
+                          Text(
+                            "Delivery Address: ${restaurant.deliveryAddress}",
+                          ),
+                          // Payment Method inside the container
+                          Text(
+                            "Payment Method: ${paymentMethod.isNotEmpty ? paymentMethod : "Not Provided"}",
+                          ),
 
-                          const SizedBox(height: 55),
+
+
+                          const SizedBox(height: 40),
 
                           // Close Button
                           MyButton(

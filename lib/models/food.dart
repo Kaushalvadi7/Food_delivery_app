@@ -17,12 +17,12 @@ class Food {
 }
 //Food Categories
 enum  FoodCategory{
-  burgers,
-  salads,
-  sides,
-  desserts,
-  pizzas,
-  drinks,
+  Burgers,
+  Salads,
+  Sides,
+  Desserts,
+  Pizzas,
+  Drinks,
 }
 
 //food addons
