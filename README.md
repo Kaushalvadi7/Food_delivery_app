@@ -32,9 +32,9 @@
 
 **Installation Steps/**
 
-  -1️⃣ *Clone the Repository/** → git clone https://github.com/yourusername/Flutter-WidgetWizard.git
-    
-  -2️⃣ *Navigate to the Project Directory/** → cd Flutter-WidgetWizard/food_delivery_app
+  -1️⃣ *Clone the Repository/** → git clone https://github.com/Kaushalvadi7/Food_delivery_app.git
+  
+  -2️⃣ *Navigate to the Project Directory/** → cd food_delivery_app
     
   -3️⃣ *Install Dependencies/** → flutter pub get
   
