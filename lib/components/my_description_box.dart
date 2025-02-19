@@ -22,7 +22,7 @@ class MyDescriptionBox extends StatelessWidget {
           //delivery fee
           Column(
             children: [
-              Text("₹40", style: myPrimaryTextStyle,),
+              Text("₹30", style: myPrimaryTextStyle,),
               Text('Delivery Fee', style: mySecondaryTextStyle,),
             ],
           ),

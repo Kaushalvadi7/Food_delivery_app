@@ -348,6 +348,9 @@ class Restaurant extends ChangeNotifier{
         ]),
   ];
 
+  // Delivery charge is fixed at ₹40
+  static const double deliveryCharge = 30.0;
+
   // user cart
   List<CartItem> _cart = [];
 
@@ -440,9 +443,9 @@ int getTotalItemCount(){
     return getSubtotal() * 0.05; // 5% of subtotal
   }
 
-// Get final total (Subtotal + Tax)
+// Get final total (Subtotal + Tax + deliveryCharge)
   double getTotalPrice() {
-    return getSubtotal() + getTax();
+    return getSubtotal() + getTax() + deliveryCharge;
   }
 
 

@@ -10,7 +10,7 @@ import 'package:food_delivery_app/models/food.dart';
 import 'package:food_delivery_app/models/restaurant.dart';
 import 'package:food_delivery_app/pages/cart_page.dart';
 import 'package:food_delivery_app/pages/food_page.dart';
-import 'package:food_delivery_app/pages/setting_page.dart';
+import 'package:food_delivery_app/pages/profile_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,7 +36,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   final List<Widget> _pages = [
     HomeContent(),
     CartPage(),
-    SettingPage(),
+    ProfilePage(),
+
   ];
 
   @override
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               }
             },
           ),
-          Icon(Icons.settings, color: Theme.of(context).colorScheme.inversePrimary),
+          Icon(Icons.person, color: Theme.of(context).colorScheme.inversePrimary), // Profile Icon Added
         ],
         index: _index,
         onTap: (index) {

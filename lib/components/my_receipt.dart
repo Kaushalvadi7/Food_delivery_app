@@ -69,11 +69,16 @@ class MyReceipt extends StatelessWidget {
                           Text("Total item: ₹${restaurant.getTotalItemCount()}"),
                           Text("Subtotal: ₹${restaurant.getSubtotal()}"),
                           Text("Tax (5%): ₹${restaurant.getTax().toStringAsFixed(2)}"),
+                          // Delivery Charge
+                          Text(
+                            "Delivery Charge: ₹${Restaurant.deliveryCharge}",
+                          ),
                           Text(
                             "Total: ₹${restaurant.getTotalPrice()}",
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 10),
+
                           Text(
                             "Delivery Address: ${restaurant.deliveryAddress}",
                           ),
