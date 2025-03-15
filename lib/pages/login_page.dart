@@ -35,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
     if (user != null) {
       Future.delayed(Duration.zero, () {
         Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
         );
@@ -51,11 +52,13 @@ class _LoginPageState extends State<LoginPage> {
         passwordController.text,
       );
       Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     } catch (e) {
       showDialog(
+        // ignore: use_build_context_synchronously
         context: context,
         builder: (context) => AlertDialog(
           title: const Text("Login Failed"),
@@ -77,11 +80,13 @@ class _LoginPageState extends State<LoginPage> {
       final user = await _authService.loginWithGoogle();
       if (user != null) {
         Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => ProfileCreationPage()),
         );
       }
     } catch (e) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Google login failed: ${e.toString()}")),
       );
@@ -183,20 +188,20 @@ class _LoginPageState extends State<LoginPage> {
                 onTap: googleLogin,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 25, horizontal: 150),
+                   horizontal: 125),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(13),
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Colors.blueGrey,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Image.asset('assets/images/google.png', height: 30, width: 30),
+                      Image.asset('assets/images/google.png', height: 75, width: 30),
                       const SizedBox(width: 10),
                       Text(
                         "Google",
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.inversePrimary,
                         ),

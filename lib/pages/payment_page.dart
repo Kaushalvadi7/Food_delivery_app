@@ -78,8 +78,10 @@ class _PaymentPageState extends State<PaymentPage> {
     );
 
     Future.delayed(const Duration(seconds: 3), () {
+      // ignore: use_build_context_synchronously
       Navigator.pop(context); // Close the Lottie dialog FIRST
       Navigator.push(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (context) => const DeliveryProgressPage(paymentMethod: 'Credit Card',),

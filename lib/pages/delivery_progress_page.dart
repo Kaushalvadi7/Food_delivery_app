@@ -5,8 +5,6 @@ import 'package:food_delivery_app/pages/cart_page.dart';
 import 'package:food_delivery_app/services/database/firestore.dart';
 import 'package:provider/provider.dart';
 
-import 'home_page.dart';
-
 class DeliveryProgressPage extends StatefulWidget {
   final String paymentMethod;
 
@@ -16,14 +14,13 @@ class DeliveryProgressPage extends StatefulWidget {
 }
 
 class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
-
   //get access to db
   final FirestoreService db = FirestoreService();
   late String receipt;
   late String finalPaymentMethod;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
 
     // Assign payment method properly
@@ -31,7 +28,8 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
         ? widget.paymentMethod
         : "Not Provided";
 
-    debugPrint("Payment Method in DeliveryProgressPage (initState): $finalPaymentMethod");
+    debugPrint(
+        "Payment Method in DeliveryProgressPage (initState): $finalPaymentMethod");
 
     // Get the receipt from the restaurant provider
     receipt = context.read<Restaurant>().displayCartReceipt();
@@ -41,25 +39,29 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("Payment Method in DeliveryProgressPage (build): $finalPaymentMethod");
+    debugPrint(
+        "Payment Method in DeliveryProgressPage (build): $finalPaymentMethod");
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Order Progress", style: TextStyle(
-            color:Colors.grey
-        ),),
+        title: const Text(
+          "Order Progress",
+          style: TextStyle(color: Colors.grey),
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        leading: IconButton(onPressed:() {
-          Provider.of<Restaurant>(context, listen: false).clearCart();
+        leading: IconButton(
+            onPressed: () {
+              Provider.of<Restaurant>(context, listen: false).clearCart();
 
-          // Navigate to HomePage and remove previous pages from stack
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => CartPage()),
+              // Navigate to HomePage and remove previous pages from stack
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => CartPage()),
                 (route) => false,
-          );
-        }, icon: Icon(Icons.arrow_back_ios)),
+              );
+            },
+            icon: Icon(Icons.arrow_back_ios)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -9,6 +9,7 @@ class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProfilePageState createState() => _ProfilePageState();
 }
 
@@ -60,6 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
       selectedAvatar = newAvatar;
     });
 
+    // ignore: use_build_context_synchronously
     Navigator.pop(context);
     _showUpdateDialog();
   }

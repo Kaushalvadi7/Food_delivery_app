@@ -352,6 +352,7 @@ class Restaurant extends ChangeNotifier{
   static const double deliveryCharge = 30.0;
 
   // user cart
+  // ignore: prefer_final_fields
   List<CartItem> _cart = [];
 
   //delivery address(Which user can change/update)

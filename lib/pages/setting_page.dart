@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 
 import '../services/auth/login_or_registration.dart';
 import 'about_us.dart';
+import 'contact_us_page.dart';
+import 'home_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -23,16 +25,25 @@ class SettingPage extends StatelessWidget {
         ),),
         backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 2,
+        leading : IconButton(
+            onPressed: (){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=>HomePage()));
+            },
+            icon: Icon(Icons.arrow_back_ios,
+              color: Theme.of(context).colorScheme.inversePrimary,)),
 
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
+
+      //body
       body: Column(
         children: [
           GestureDetector(
             onTap: () {
               Provider.of<ThemeProvider>(context, listen: false).toggleTheme();},
             child: Container(
-              decoration: BoxDecoration(color: Colors.lightBlueAccent.shade200  ,
+              decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary  ,
               borderRadius: BorderRadius.circular(12)),
               margin: const EdgeInsets.only(left: 25, top: 10, right: 25),
               padding: const EdgeInsets.all(25),
@@ -74,7 +85,42 @@ class SettingPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.lightBlueAccent.shade200,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Contact Container
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ContactUsPage()),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                borderRadius: BorderRadius.circular(13),
+              ),
+              margin: const EdgeInsets.only(top: 10, left: 25, right: 25),
+              padding: const EdgeInsets.all(25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Contact Us",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                     ),
                   ),
                   const Icon(

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/components/my_drawer_tile.dart';
+import 'package:food_delivery_app/pages/about_us.dart';
 import 'package:food_delivery_app/services/auth/login_or_registration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../pages/home_page.dart';
@@ -55,6 +56,17 @@ class MyDrawer extends StatelessWidget {
             },
           ),
 
+          //About Us tile
+          MyDrawerTile(
+            text:"A B O U T  U S",
+            icon: Icons.info_outline_rounded,
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => const AboutUs(),));
+            },
+          ),
+
           const Spacer(),
 
           //logout list tile
@@ -73,13 +85,7 @@ class MyDrawer extends StatelessWidget {
                   await prefs.remove("lastLogin_${user.uid}");     // Example key for tracking last login
                   await prefs.remove("cartData_${user.uid}");      // Example key for user-specific cart data
 
-                  // // ✅ Clear ONLY the logged-in user's session data
-                  // await prefs.remove("userName_${user.uid}");
-                  // await prefs.remove("email_${user.uid}");
-                  // await prefs.remove("phoneNumber_${user.uid}");
-                  // await prefs.remove("address_${user.uid}");
-
-                  // ❗ DO NOT remove `isProfileCreated_${user.uid}` to preserve profile status
+                  
                 }
 
                 // Log out from Firebase
@@ -95,6 +101,7 @@ class MyDrawer extends StatelessWidget {
                 }
               } catch (e) {
                 // Handle errors
+                // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text("Error logging out: $e")),
                 );

@@ -9,6 +9,7 @@ class AddonSelectionBottomSheet extends StatefulWidget {
   const AddonSelectionBottomSheet({super.key, required this.food});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddonSelectionBottomSheetState createState() => _AddonSelectionBottomSheetState();
 }
 

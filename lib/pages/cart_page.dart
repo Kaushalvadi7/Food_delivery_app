@@ -107,8 +107,10 @@ class CartPage extends StatelessWidget {
                     );
                     // Close the dialog after 3 seconds and go to Home Page
                     Future.delayed(const Duration(seconds: 3), () {
+                      // ignore: use_build_context_synchronously
                       Navigator.pop(context); // Close AlertDialog
                       Navigator.pushAndRemoveUntil(
+                        // ignore: use_build_context_synchronously
                         context,
                         MaterialPageRoute(builder: (context) => const HomePage()),
                             (route) => false, // Remove all previous routes
@@ -214,8 +216,10 @@ void _showPaymentDialog(BuildContext context) {
               onLoaded: (composition) {
 
                 Future.delayed(composition.duration, () {
+                  // ignore: use_build_context_synchronously
                   Navigator.pop(context);
                   Navigator.push(
+                    // ignore: use_build_context_synchronously
                     context,
                     MaterialPageRoute(
                       builder: (context) => DeliveryProgressPage(paymentMethod: paymentMethod),

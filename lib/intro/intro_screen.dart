@@ -10,6 +10,7 @@ class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _IntroScreenState createState() => _IntroScreenState();
 }
 
@@ -22,6 +23,7 @@ class _IntroScreenState extends State<IntroScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('hasSeenIntro', true);
     Navigator.pushReplacement(
+      // ignore: use_build_context_synchronously
       context,
       MaterialPageRoute(builder: (context) => const AuthGate()),
     );

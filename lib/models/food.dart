@@ -1,4 +1,6 @@
 //food item
+// ignore_for_file: constant_identifier_names
+
 class Food {
   final String name; // cheese burger
   final String description;  // a burger full of cheese

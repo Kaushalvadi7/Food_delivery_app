@@ -12,6 +12,7 @@ class ProfileCreationPage extends StatefulWidget {
   const ProfileCreationPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProfileCreationPageState createState() => _ProfileCreationPageState();
 }
 
@@ -54,9 +55,11 @@ class _ProfileCreationPageState extends State<ProfileCreationPage> {
     await prefs.setBool('isProfileCreated', true);
 
 
+    // ignore: use_build_context_synchronously
     context.read<Restaurant>().updateDeliveryAddress(_addressController.text);
 
     showDialog(
+      // ignore: use_build_context_synchronously
       context: context,
       barrierDismissible: false,
       builder: (context) => Dialog(
@@ -70,8 +73,10 @@ class _ProfileCreationPageState extends State<ProfileCreationPage> {
                   onLoaded: (composition) {
                     Future.delayed(composition.duration, () {
                       if (mounted) {
+                        // ignore: use_build_context_synchronously
                         Navigator.pop(context);
                         Navigator.pushReplacement(
+                            // ignore: use_build_context_synchronously
                             context, MaterialPageRoute(builder: (context) => HomePage()));
                       }
                     });
@@ -179,6 +184,7 @@ class _ProfileCreationPageState extends State<ProfileCreationPage> {
     return TextField(
       controller: controller,
       keyboardType: isEmail ? TextInputType.emailAddress : (isPhone ? TextInputType.phone : keyboardType),
+      style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         prefixIcon: Icon(icon, color: Color.fromARGB(255, 255, 198, 113)),
         labelText: hint,
@@ -187,7 +193,7 @@ class _ProfileCreationPageState extends State<ProfileCreationPage> {
         fillColor: Colors.grey.shade100,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(),
         ),
       ),
     );
