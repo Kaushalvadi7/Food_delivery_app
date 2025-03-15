@@ -12,6 +12,7 @@ class AuthService {
   // 🔹 Sign in with Google
   Future<UserCredential?> loginWithGoogle() async {
     try {
+      await _googleSignIn.signOut();
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null; // User canceled sign-in
 
@@ -54,7 +55,7 @@ class AuthService {
     }
   }
 
-  //sign up
+  //sign up with Email & Password
   Future<UserCredential> signUpWithEmailPassword(String email, String password) async {
     //try sign  user in
     try {

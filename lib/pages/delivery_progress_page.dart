@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/components/my_receipt.dart';
 import 'package:food_delivery_app/models/restaurant.dart';
+import 'package:food_delivery_app/pages/cart_page.dart';
 import 'package:food_delivery_app/services/database/firestore.dart';
 import 'package:provider/provider.dart';
+
+import 'home_page.dart';
 
 class DeliveryProgressPage extends StatefulWidget {
   final String paymentMethod;
@@ -47,6 +50,16 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
         ),),
         centerTitle: true,
         backgroundColor: Colors.transparent,
+        leading: IconButton(onPressed:() {
+          Provider.of<Restaurant>(context, listen: false).clearCart();
+
+          // Navigate to HomePage and remove previous pages from stack
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => CartPage()),
+                (route) => false,
+          );
+        }, icon: Icon(Icons.arrow_back_ios)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

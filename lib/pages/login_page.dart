@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/components/my_button.dart';
 import 'package:food_delivery_app/components/my_textfield.dart';
+import 'package:food_delivery_app/pages/profile_creation_page.dart';
 import '../services/auth/auth_service.dart';
 import 'home_page.dart';
 
@@ -77,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
       if (user != null) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => ProfileCreationPage()),
         );
       }
     } catch (e) {
@@ -182,10 +183,10 @@ class _LoginPageState extends State<LoginPage> {
                 onTap: googleLogin,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 20, horizontal: 175),
+                      vertical: 25, horizontal: 150),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(13),
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

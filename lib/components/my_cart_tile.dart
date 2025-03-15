@@ -16,7 +16,7 @@ class MyCartTile extends StatelessWidget {
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(10),
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 25,vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
       child: Column(
         children: [
           Padding(
@@ -34,26 +34,54 @@ class MyCartTile extends StatelessWidget {
 
                 const SizedBox(width: 10,),
                 //name and price
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // food name
-                      Text(cartItem.food.name),
-                      //food price
-                      Text('₹${cartItem.food.price}'),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // food name
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,                       child: Text(cartItem.food.name,
+                          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+
+                          ),
+                        ),
+
+                        const SizedBox(height: 5,),
+
+                        //food price
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                              '₹${cartItem.food.price}',
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+                          ),
+                        ),
+
+                        // Text('₹${cartItem.food.price}',style: TextStyle(fontWeight: FontWeight.w400),),
+                      ],
+                    ),
                   ),
                 const Spacer(),
                 // increment or decrement quantity
-                  QuantitySelector(
-                      quantity: cartItem.quantity,
-                      food: cartItem.food,
-                      onDecrement: () {
-                        restaurant.removeFromCart(cartItem);
-                      },
-                      onIncrement:(){
-                        restaurant.addToCart(cartItem.food, cartItem.selectAddons);
-                      })
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: QuantitySelector(
+                        quantity: cartItem.quantity,
+                        food: cartItem.food,
+                        onDecrement: () {
+                          restaurant.removeFromCart(cartItem);
+                        },
+                        onIncrement:(){
+                          restaurant.addToCart(cartItem.food, cartItem.selectAddons);
+                        }),
+                  )
               ],
             ),
           ),
@@ -72,10 +100,11 @@ class MyCartTile extends StatelessWidget {
                         label: Row(
                                       children: [
                                         //addon name
-                                        Text(addon.name),
+                                        Text(addon.name,style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),),
+                                        SizedBox(width: 5,),
                                         // addon price
                                         Text('₹${addon.price.toString()}',
-                                        style: TextStyle(color: Theme.of(context).colorScheme.primary),),
+                                        style: TextStyle(color: Theme.of(context).colorScheme.primary,fontWeight: FontWeight.bold, fontSize: 15),),
                                       ],
                                     ),
                                       shape: StadiumBorder(
@@ -99,6 +128,5 @@ class MyCartTile extends StatelessWidget {
         ],
       ),
     ));
-    return const Placeholder();
   }
 }

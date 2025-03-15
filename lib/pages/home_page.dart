@@ -11,6 +11,7 @@ import 'package:food_delivery_app/models/restaurant.dart';
 import 'package:food_delivery_app/pages/cart_page.dart';
 import 'package:food_delivery_app/pages/food_page.dart';
 import 'package:food_delivery_app/pages/profile_page.dart';
+import 'package:food_delivery_app/pages/setting_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,6 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
   //tab controller
+  // ignore: unused_field
   late TabController _tabController;
   int _index = 0;
 
@@ -37,6 +39,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     HomeContent(),
     CartPage(),
     ProfilePage(),
+    SettingPage(),
 
   ];
 
@@ -66,6 +69,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             },
           ),
           Icon(Icons.person, color: Theme.of(context).colorScheme.inversePrimary), // Profile Icon Added
+          Icon(Icons.settings, color: Theme.of(context).colorScheme.inversePrimary), // Added Settings Icon
+
         ],
         index: _index,
         onTap: (index) {
@@ -95,9 +100,9 @@ class HomeContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Divider(
-                  indent: 25,
+                  indent: 18,
                   endIndent: 25,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Colors.grey,
                 ),
                 MyCurrentLocation(),
                 const MyDescriptionBox(),

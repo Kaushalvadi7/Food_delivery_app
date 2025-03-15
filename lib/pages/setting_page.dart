@@ -17,10 +17,13 @@ class SettingPage extends StatelessWidget {
         title: const Text(
           "Settings",
           style: TextStyle(
-          color: Colors.grey,
+          color: Colors.white,
           fontWeight: FontWeight.bold,
+
         ),),
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        elevation: 2,
+
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
@@ -29,7 +32,7 @@ class SettingPage extends StatelessWidget {
             onTap: () {
               Provider.of<ThemeProvider>(context, listen: false).toggleTheme();},
             child: Container(
-              decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary,
+              decoration: BoxDecoration(color: Colors.lightBlueAccent.shade200  ,
               borderRadius: BorderRadius.circular(12)),
               margin: const EdgeInsets.only(left: 25, top: 10, right: 25),
               padding: const EdgeInsets.all(25),
@@ -71,7 +74,7 @@ class SettingPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.inversePrimary,
+                      color: Colors.lightBlueAccent.shade200,
                     ),
                   ),
                   const Icon(
@@ -89,6 +92,7 @@ class SettingPage extends StatelessWidget {
               try {
                 await FirebaseAuth.instance.signOut();
                 Navigator.pushAndRemoveUntil(
+                  // ignore: use_build_context_synchronously
                   context,
                   MaterialPageRoute(
                     builder: (context) => const LoginOrRegister(),
@@ -96,6 +100,7 @@ class SettingPage extends StatelessWidget {
                       (route) => false,
                 );
               } catch (e) {
+                // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text("Error logging out: $e")),
                 );

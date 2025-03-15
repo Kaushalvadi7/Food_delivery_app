@@ -355,7 +355,8 @@ class Restaurant extends ChangeNotifier{
   List<CartItem> _cart = [];
 
   //delivery address(Which user can change/update)
-  String _deliveryAddress = 'Krishna Colony Street No.7';
+  String _deliveryAddress = '';
+
 
   /*
   G E T T E R S

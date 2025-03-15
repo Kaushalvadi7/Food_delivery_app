@@ -48,7 +48,7 @@ class _FoodPageState extends State<FoodPage> {
     child: Column(
     children: [
     //food image
-    Image.asset(widget.food.imagePath),
+    Image.asset(widget.food.imagePath,),
 
     //food name
     Padding(
@@ -83,7 +83,7 @@ class _FoodPageState extends State<FoodPage> {
 
     const SizedBox(height: 10,),
     Divider(
-    color: Theme.of(context).colorScheme.secondary,
+    color: Colors.grey,
     ),
 
     const SizedBox(height: 10,),
@@ -97,7 +97,7 @@ class _FoodPageState extends State<FoodPage> {
     const SizedBox(height: 10,),
     Container(
     decoration: BoxDecoration(
-    border: Border.all(color: Theme.of(context).colorScheme.secondary),
+    border: Border.all(color: Colors.grey),
     borderRadius: BorderRadius.circular(8)),
     child: ListView.builder(
     shrinkWrap: true,
@@ -108,36 +108,44 @@ class _FoodPageState extends State<FoodPage> {
     //get individual addon
     Addon addon  = widget.food.availableAddons[index];
     //return checkbox ui
-    return CheckboxListTile(
-      title: Text(addon.name),
-      subtitle: Padding(
-        padding: const EdgeInsets.only(right: 300),
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-            color:
-            Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            '₹${addon.price}',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
+    return Column(
+      children: [
+        CheckboxListTile(
+          title: Text(addon.name),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(right: 230),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color:
+                Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                '₹${addon.price}',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
+          value: widget.selectedAddons[addon],
+          onChanged: (bool? value) {
+            setState(() {
+              widget.selectedAddons[addon] = value!;
+            });
+          },
         ),
-      ),
-      value: widget.selectedAddons[addon],
-      onChanged: (bool? value) {
-        setState(() {
-          widget.selectedAddons[addon] = value!;
-        });
-      },
+        if (index < widget.food.availableAddons.length - 1)
+          const Divider(thickness: 1, color: Colors.grey),
+
+      ],
     );
-    }),
+    },
+    ),
     ),
     ],
     ),
