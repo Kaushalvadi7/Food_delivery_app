@@ -348,7 +348,7 @@ class Restaurant extends ChangeNotifier{
         ]),
   ];
 
-  // Delivery charge is fixed at ₹40
+  // Delivery charge is fixed at ₹30
   static const double deliveryCharge = 30.0;
 
   // user cart
@@ -480,9 +480,6 @@ H E L P E R S
 
   receipt.writeln(formattedDate);
   receipt.writeln();
-  receipt.writeln("-----------");
-    receipt.writeln();
-
 
   for(final cartItem in cart) {
     receipt.writeln("${cartItem.quantity} x ${cartItem.food.name} -${_formatPrice(cartItem.food.price)}");
@@ -491,18 +488,33 @@ H E L P E R S
     }
     receipt.writeln();
   }
-    receipt.writeln("-----------");
+
+    // Calculate total price
+    double subtotal = getSubtotal();
+    double gst = subtotal * 0.05; // 5% GST
+    double deliveryCharge = 30.0; // Fixed delivery charge
+    double finalAmount = subtotal + gst + deliveryCharge;
+
+    receipt.writeln("Total Items  :  ${getTotalItemCount()}");
+    receipt.writeln("Total Price  :  ${_formatPrice(subtotal)}");
+    receipt.writeln("GST (5%)     :  ${_formatPrice(gst)}");
+    receipt.writeln("Delivery Fee :  ${_formatPrice(deliveryCharge)}");
+    receipt.writeln("Final Amount :  ${_formatPrice(finalAmount)}");
+    receipt.writeln();
+    receipt.writeln("Delivered To : $deliveryAddress");
+
     return receipt.toString();
-
   }
- // format double value into money
-String _formatPrice(double price){
-  return "(₹${price.toStringAsFixed(2)})";
-}
 
-//format list of addons in to a string summary
-String _formatAddons(List<Addon> addons){
-  return addons.map((addon) => "${addon.name} ${_formatPrice(addon.price)}")
-      .join(",");
-}
+// Format double value into money
+  String _formatPrice(double price) {
+    return "Rs.${price.toStringAsFixed(2)}";
+  }
+
+// Format a list of addons into a string summary
+  String _formatAddons(List<Addon> addons) {
+    return addons
+        .map((addon) => "${addon.name} (${_formatPrice(addon.price)})")
+        .join(",");
+  }
 }

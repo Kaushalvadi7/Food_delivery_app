@@ -1,7 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/restaurant.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:provider/provider.dart';
-
 import '../pages/home_page.dart';
 import 'my_button.dart';
 
@@ -32,11 +36,22 @@ class MyReceipt extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Thank you for your order!",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
-                ),
-              ),
+               Row(
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   Text(
+                    "Thank you for your order!",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
+                    ),
+                   ),
+                   IconButton(
+                       onPressed: () async {
+                         await _generateInvoice(context, receipt, paymentMethod);
+                       },
+                       icon: Icon(Icons.download)),
+                 ],
+               ),
               const SizedBox(height: 25),
 
               Text(
@@ -48,46 +63,27 @@ class MyReceipt extends StatelessWidget {
               // Order Receipt & Address
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Theme.of(context).colorScheme.inversePrimary),
+                  border: Border.all(
+                      color: Theme.of(context).colorScheme.inversePrimary),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 padding: const EdgeInsets.all(25),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Consumer<Restaurant>(
-                      builder: (context, restaurant, child) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(restaurant.displayCartReceipt()),
+                    Text(
+                      receipt,
+                      style: const TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
+                    const SizedBox(height: 15),
+                    Divider(
+                        color: Theme.of(context).colorScheme.inversePrimary),
+                    const SizedBox(height: 10),
 
-              // Order Summary Section
-
-              Consumer<Restaurant>(
-                  builder: (context, restaurant, child) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Total item: ₹${restaurant.getTotalItemCount()}"),
-                          Text("Subtotal: ₹${restaurant.getSubtotal()}"),
-                          Text("Tax (5%): ₹${restaurant.getTax().toStringAsFixed(2)}"),
-                          // Delivery Charge
-                          Text(
-                            "Delivery Charge: ₹${Restaurant.deliveryCharge}",
-                          ),
-                          Text(
-                            "Total: ₹${restaurant.getTotalPrice()}",
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 10),
-
-                          Text(
-                            "Delivery Address: ${restaurant.deliveryAddress}",
-                          ),
                           // Payment Method inside the container
                           Text(
                             "Payment Method: ${paymentMethod.isNotEmpty ? paymentMethod : "Not Provided"}",
                           ),
-
-
 
                           const SizedBox(height: 40),
 
@@ -110,17 +106,164 @@ class MyReceipt extends StatelessWidget {
                       ),
 
                 ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
             ],
           ),
         ),
       ),
     );
   }
+  // Function to check permission and save invoice PDF
+  Future<void> _generateInvoice(
+      BuildContext context, String receipt, String paymentMethod) async {
+    try {
+      final pdf = pw.Document();
+      final now = DateTime.now();
+      final formattedDate = "${now.day}/${now.month}/${now.year}";
+
+      pdf.addPage(
+        pw.Page(
+          margin: const pw.EdgeInsets.all(32),
+          build: (pw.Context context) {
+            return pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                // Header with Branding
+                pw.Center(
+                  child: pw.Column(
+                    children: [
+                      pw.Text("ZaikIt",
+                          style: pw.TextStyle(
+                              fontSize: 24,
+                              fontWeight: pw.FontWeight.bold,
+                              color: PdfColors.blue)),
+                      pw.Text("Food Delivery Invoice",
+                          style: pw.TextStyle(
+                              fontSize: 18, fontWeight: pw.FontWeight.bold)),
+                    ],
+                  ),
+                ),
+                pw.Divider(thickness: 2),
+
+                // Invoice Details
+                pw.SizedBox(height: 10),
+                pw.Text("Invoice Date: $formattedDate",
+                    style:
+                    pw.TextStyle(fontSize: 14, color: PdfColors.grey700)),
+                pw.SizedBox(height: 10),
+                pw.Divider(),
+
+                // Order Details Table
+                pw.Text("Order Summary",
+                    style: pw.TextStyle(
+                        fontSize: 16, fontWeight: pw.FontWeight.bold)),
+                pw.SizedBox(height: 5),
+                pw.Table(
+                  border: pw.TableBorder.all(width: 1, color: PdfColors.black),
+                  columnWidths: {
+                    0: pw.FlexColumnWidth(3),
+                    1: pw.FlexColumnWidth(1),
+                  },
+                  children: [
+                    pw.TableRow(
+                      decoration: pw.BoxDecoration(color: PdfColors.grey300),
+                      children: [
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Item",
+                                style: pw.TextStyle(
+                                    fontWeight: pw.FontWeight.bold))),
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.all(8),
+                            child: pw.Text("Price",
+                                style: pw.TextStyle(
+                                    fontWeight: pw.FontWeight.bold))),
+                      ],
+                    ),
+                    ...receipt.split("\n").map((line) {
+                      final parts = line.split(" - ");
+                      return pw.TableRow(
+                        children: [
+                          pw.Padding(
+                              padding: const pw.EdgeInsets.all(8),
+                              child: pw.Text(parts[0],
+                                  style: pw.TextStyle(fontSize: 14))),
+                          pw.Padding(
+                              padding: const pw.EdgeInsets.all(8),
+                              child: pw.Text(parts.length > 1 ? parts[1] : "",
+                                  style: pw.TextStyle(fontSize: 14))),
+                        ],
+                      );
+                    }),
+                  ],
+                ),
+
+                pw.SizedBox(height: 10),
+                pw.Divider(),
+
+                // Payment Method
+                pw.Text(
+                    "Payment Method: ${paymentMethod.isNotEmpty ? paymentMethod : "Not Provided"}",
+                    style: pw.TextStyle(
+                        fontSize: 16,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColors.blue)),
+
+                pw.SizedBox(height: 20),
+
+                // Footer
+                pw.Center(
+                  child: pw.Text("Thank you for ordering with KD Serve!",
+                      style: pw.TextStyle(
+                          fontSize: 14,
+                          fontWeight: pw.FontWeight.bold,
+                          color: PdfColors.green700)),
+                ),
+              ],
+            );
+          },
+        ),
+      );
+
+      // Save the PDF
+      Directory directory = await getApplicationDocumentsDirectory();
+      final filePath = "${directory.path}/invoice.pdf";
+      final file = File(filePath);
+      await file.writeAsBytes(await pdf.save());
+
+      // Show Dialog
+      _showInvoiceDialog(context, filePath);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Failed to save invoice: ${e.toString()}")),
+      );
+    }
+  }
+
+  void _showInvoiceDialog(BuildContext context, String filePath) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Invoice Generated"),
+          content: const Text("Your invoice has been generated successfully."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                OpenFile.open(filePath);
+              },
+              child: const Text("Open"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Close"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }

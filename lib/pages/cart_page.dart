@@ -152,8 +152,7 @@ void _showPaymentDialog(BuildContext context) {
           data: Theme.of(context).copyWith(
             dialogTheme: DialogThemeData(
               //backgroundColor: const Color.fromARGB(255, 233, 174, 91),
-                backgroundColor: Colors.blue
-                    .shade300), // Change background color
+                backgroundColor: Theme.of(context).colorScheme.primary), // Change background color
           ),
           child: AlertDialog(
             title: const Text(
@@ -225,6 +224,7 @@ void _showPaymentDialog(BuildContext context) {
                       builder: (context) => DeliveryProgressPage(paymentMethod: paymentMethod),
                     ),
                   );
+                  
                 });
               },
             ),
