@@ -11,7 +11,7 @@ plugins {
 android {
     namespace "com.example.food_delivery_app"  // ✅ Corrected: Only one namespace
 
-    compileSdkVersion 34  // ✅ Corrected: Only one compileSdkVersion
+    compileSdkVersion 35  // ✅ Corrected: Only one compileSdkVersion
 
     ndkVersion = flutter.ndkVersion
 
@@ -27,7 +27,7 @@ android {
     defaultConfig {
         applicationId "com.example.food_delivery_app"
         minSdkVersion 23
-        targetSdkVersion 33
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
     }

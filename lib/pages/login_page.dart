@@ -191,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                    horizontal: 125),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(13),
-                    color: Colors.blueGrey,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

@@ -7,24 +7,24 @@ class AboutUs extends StatelessWidget {
   // Function to launch Email
   Future<void> _launchEmail() async {
     final Uri emailUri = Uri(scheme: 'mailto', path: 'zaikit@gmail.com');
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri, mode: LaunchMode.externalApplication);
+    if (!await launchUrl(emailUri, mode: LaunchMode.externalApplication)) {
+      debugPrint('Could not launch email');
     }
   }
 
   // Function to launch Phone
   Future<void> _launchPhone() async {
     final Uri phoneUri = Uri(scheme: 'tel', path: '+919876543210');
-    if (await canLaunchUrl(phoneUri)) {
-      await launchUrl(phoneUri, mode: LaunchMode.externalApplication);
+    if (!await launchUrl(phoneUri, mode: LaunchMode.externalApplication)) {
+      debugPrint('Could not launch phone');
     }
   }
 
   // Function to launch Google Maps
   Future<void> _launchMap() async {
     final Uri mapUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=Anand,Gujarat");
-    if (await canLaunchUrl(mapUri)) {
-      await launchUrl(mapUri, mode: LaunchMode.externalApplication);
+    if (!await launchUrl(mapUri, mode: LaunchMode.externalApplication)) {
+      debugPrint('Could not launch map');
     }
   }
 

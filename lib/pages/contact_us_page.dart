@@ -6,6 +6,7 @@ class ContactUsPage extends StatefulWidget {
   const ContactUsPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ContactUsPageState createState() => _ContactUsPageState();
 }
 
@@ -37,10 +38,12 @@ class _ContactUsPageState extends State<ContactUsPage> {
 
       // Show Lottie animation after submission
       showDialog(
+        // ignore: use_build_context_synchronously
         context: context,
         barrierDismissible: false,
         builder: (context) {
           Future.delayed(Duration(seconds: 3), () {
+            // ignore: use_build_context_synchronously
             Navigator.pop(context); // Close animation
 
             // Ensure _isSubmitting is reset and navigate to home
@@ -49,6 +52,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
             });
 
             // Navigate to Home page (adjust route if needed)
+            // ignore: use_build_context_synchronously
             Navigator.popUntil(context, (route) => route.isFirst);
           });
           return Dialog(
