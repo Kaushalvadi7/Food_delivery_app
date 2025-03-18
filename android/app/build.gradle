@@ -9,13 +9,14 @@ plugins {
 }
 
 android {
-    namespace "com.example.food_delivery_app"  // ✅ Corrected: Only one namespace
+    namespace "com.example.food_delivery_app"
 
-    compileSdkVersion 35  // ✅ Corrected: Only one compileSdkVersion
+    compileSdkVersion 35
 
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -46,3 +47,8 @@ android {
 flutter {
     source = "../.."  // ✅ No change needed
 }
+
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+}
+

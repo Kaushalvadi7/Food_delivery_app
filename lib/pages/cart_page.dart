@@ -4,6 +4,7 @@ import 'package:food_delivery_app/pages/payment_page.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../models/restaurant.dart';
+import '../services/notification_service/noti_service.dart';
 import 'delivery_progress_page.dart';
 import 'home_page.dart';
 
@@ -16,6 +17,8 @@ class CartPage extends StatelessWidget {
       //cart
       final  userCart = restaurant.cart;
 
+      // calculate total price dynamically
+      double totalPrice = userCart.fold(0, (sum, cartItem) => sum + cartItem.totalPrice);
       //Scaffold UI
       return Scaffold(
         appBar: AppBar(
@@ -85,6 +88,21 @@ class CartPage extends StatelessWidget {
                 ],
               ),
             ),
+
+            // Total Price
+            totalPrice > 0
+                ? Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                "Total Price : Rs ${totalPrice.toStringAsFixed(2)}",
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+            )
+                : SizedBox(),
 
             // button to pay
             SizedBox(
@@ -224,7 +242,9 @@ void _showPaymentDialog(BuildContext context) {
                       builder: (context) => DeliveryProgressPage(paymentMethod: paymentMethod),
                     ),
                   );
-                  
+                  NotiService().showNotification(
+                      title: "ZaikIt",
+                      body: "Your Order has been Placed!");
                 });
               },
             ),

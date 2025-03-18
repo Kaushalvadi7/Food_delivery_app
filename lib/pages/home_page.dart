@@ -10,9 +10,11 @@ import 'package:food_delivery_app/models/food.dart';
 import 'package:food_delivery_app/models/restaurant.dart';
 import 'package:food_delivery_app/pages/cart_page.dart';
 import 'package:food_delivery_app/pages/food_page.dart';
+import 'package:food_delivery_app/pages/profile_creation_page.dart';
 import 'package:food_delivery_app/pages/profile_page.dart';
 import 'package:food_delivery_app/pages/setting_page.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -32,7 +34,29 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState() {
   super.initState();
-  _tabController = TabController(length: FoodCategory.values.length, vsync: this); // Initializing it, // vsync ensures smooth animation
+  _tabController = TabController(length: FoodCategory.values.length, vsync: this);
+  _checkFirstTimeUser();
+  // Initializing it, // vsync ensures smooth animation
+  }
+
+  Future<void> _checkFirstTimeUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isProfileCreated = prefs.getBool('isProfileCreated');
+
+    if (!isProfileCreated!) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileCreationPage()),
+        );
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   final List<Widget> _pages = [
@@ -102,7 +126,7 @@ class HomeContent extends StatelessWidget {
                 Divider(
                   indent: 18,
                   endIndent: 25,
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 MyCurrentLocation(),
                 const MyDescriptionBox(),

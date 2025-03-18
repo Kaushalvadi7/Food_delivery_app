@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/restaurant.dart';
 import 'package:open_file/open_file.dart';
@@ -133,7 +134,7 @@ class MyReceipt extends StatelessWidget {
                     children: [
                       pw.Text("ZaikIt",
                           style: pw.TextStyle(
-                              fontSize: 24,
+                              fontSize: 26,
                               fontWeight: pw.FontWeight.bold,
                               color: PdfColors.blue)),
                       pw.Text("Food Delivery Invoice",
@@ -142,77 +143,95 @@ class MyReceipt extends StatelessWidget {
                     ],
                   ),
                 ),
-                pw.Divider(thickness: 2),
+
+                pw.SizedBox(height: 15),
 
                 // Invoice Details
-                pw.SizedBox(height: 10),
                 pw.Text("Invoice Date: $formattedDate",
-                    style:
-                    pw.TextStyle(fontSize: 14, color: PdfColors.grey700)),
-                pw.SizedBox(height: 10),
-                pw.Divider(),
+                    style: pw.TextStyle(fontSize: 14, color: PdfColors.grey700)),
 
-                // Order Details Table
+                pw.SizedBox(height: 15),
+
+                // Order Summary Section
                 pw.Text("Order Summary",
                     style: pw.TextStyle(
-                        fontSize: 16, fontWeight: pw.FontWeight.bold)),
+                        fontSize: 18, fontWeight: pw.FontWeight.bold)),
                 pw.SizedBox(height: 5),
-                pw.Table(
-                  border: pw.TableBorder.all(width: 1, color: PdfColors.black),
-                  columnWidths: {
-                    0: pw.FlexColumnWidth(3),
-                    1: pw.FlexColumnWidth(1),
-                  },
-                  children: [
-                    pw.TableRow(
-                      decoration: pw.BoxDecoration(color: PdfColors.grey300),
+
+                ...receipt.split("\n").where((line) => line.contains(" - ")).map((line) {
+                  final parts = line.split(" - ");
+                  final itemName = parts[0];
+                  final itemPrice = parts.length > 1 ? parts[1] : "";
+
+                  return pw.Container(
+                    padding: const pw.EdgeInsets.symmetric(vertical: 5),
+                    child: pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                       children: [
-                        pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
-                            child: pw.Text("Item",
-                                style: pw.TextStyle(
-                                    fontWeight: pw.FontWeight.bold))),
-                        pw.Padding(
-                            padding: const pw.EdgeInsets.all(8),
-                            child: pw.Text("Price",
-                                style: pw.TextStyle(
-                                    fontWeight: pw.FontWeight.bold))),
+                        pw.Text(itemName, style: pw.TextStyle(fontSize: 14)),
+                        pw.Text(itemPrice,
+                            style: pw.TextStyle(
+                                fontSize: 14, fontWeight: pw.FontWeight.bold)),
                       ],
                     ),
-                    ...receipt.split("\n").map((line) {
-                      final parts = line.split(" - ");
-                      return pw.TableRow(
-                        children: [
-                          pw.Padding(
-                              padding: const pw.EdgeInsets.all(8),
-                              child: pw.Text(parts[0],
-                                  style: pw.TextStyle(fontSize: 14))),
-                          pw.Padding(
-                              padding: const pw.EdgeInsets.all(8),
-                              child: pw.Text(parts.length > 1 ? parts[1] : "",
-                                  style: pw.TextStyle(fontSize: 14))),
-                        ],
-                      );
-                    }),
-                  ],
+                  );
+                }),
+
+
+
+                // Summary Section
+                pw.Text(
+                  "Summary",
+                  style: pw.TextStyle(
+                      fontSize: 18, fontWeight: pw.FontWeight.bold),
                 ),
 
-                pw.SizedBox(height: 10),
-                pw.Divider(),
+                pw.SizedBox(height: 5),
+
+                ...receipt.split("\n").where((line) =>
+                line.contains("Total Items") ||
+                    line.contains("Total Price") ||
+                    line.contains("GST") ||
+                    line.contains("Delivery Fee") ||
+                    line.contains("Final Amount")).map((line) {
+                  final parts = line.split(":");
+                  return pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Text(parts[0].trim(),
+                          style: pw.TextStyle(fontSize: 14)),
+                      pw.Text(parts.length > 1 ? parts[1].trim() : "",
+                          style: pw.TextStyle(
+                              fontSize: 14, fontWeight: pw.FontWeight.bold)),
+                    ],
+                  );
+                }),
+
+                pw.SizedBox(height: 15),
 
                 // Payment Method
                 pw.Text(
-                    "Payment Method: ${paymentMethod.isNotEmpty ? paymentMethod : "Not Provided"}",
-                    style: pw.TextStyle(
-                        fontSize: 16,
-                        fontWeight: pw.FontWeight.bold,
-                        color: PdfColors.blue)),
+                  "Payment Method: ${paymentMethod.isNotEmpty ? paymentMethod : "Not Provided"}",
+                  style: pw.TextStyle(
+                      fontSize: 16,
+                      fontWeight: pw.FontWeight.bold,
+                      color: PdfColors.blue),
+                ),
 
-                pw.SizedBox(height: 20),
+                pw.SizedBox(height: 15),
+
+                // Delivery Address
+                if (receipt.contains("Delivered To"))
+                  pw.Text(
+                    "Delivered To: ${receipt.split("Delivered To : ").last}",
+                    style: pw.TextStyle(fontSize: 14, color: PdfColors.grey700),
+                  ),
+
+                pw.SizedBox(height: 25),
 
                 // Footer
                 pw.Center(
-                  child: pw.Text("Thank you for ordering with KD Serve!",
+                  child: pw.Text("Thank you for ordering with ZaikIt!",
                       style: pw.TextStyle(
                           fontSize: 14,
                           fontWeight: pw.FontWeight.bold,
@@ -223,22 +242,24 @@ class MyReceipt extends StatelessWidget {
           },
         ),
       );
+      // Get storage directory
+      final Directory directory = await getApplicationDocumentsDirectory();
+      final String filePath = "${directory.path}/invoice_${now.millisecondsSinceEpoch}.pdf";
 
-      // Save the PDF
-      Directory directory = await getApplicationDocumentsDirectory();
-      final filePath = "${directory.path}/invoice.pdf";
-      final file = File(filePath);
+      // Save PDF file
+      final File file = File(filePath);
       await file.writeAsBytes(await pdf.save());
-
-      // Show Dialog
+      // Show success dialog
       _showInvoiceDialog(context, filePath);
+
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to save invoice: ${e.toString()}")),
-      );
+      if (kDebugMode) {
+        print("Error generating invoice: $e");
+      }
     }
   }
 
+  // ignore: unused_element
   void _showInvoiceDialog(BuildContext context, String filePath) {
     showDialog(
       context: context,
@@ -265,5 +286,4 @@ class MyReceipt extends StatelessWidget {
       },
     );
   }
-
 }
