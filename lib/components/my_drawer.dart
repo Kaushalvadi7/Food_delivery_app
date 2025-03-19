@@ -19,12 +19,12 @@ class MyDrawer extends StatelessWidget {
           //app logo
           Padding(
             padding: const EdgeInsets.only(top: 100.0),
-            child: Image.asset('assets/images/logo.png',
-            width: 200,height: 100,)
+            child: Image.asset('assets/images/zaikit_logo.png',
+            width: 280,height: 140,)
           ),
 
           Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: const EdgeInsets.only(bottom: 25.0),
             child: Divider(
               color: Theme.of(context).colorScheme.secondary,
             ),

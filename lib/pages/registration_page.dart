@@ -77,18 +77,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // App logo
-                Image.asset('assets/images/logo.png', height: 150, width: 200),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Image.asset('assets/images/zaikit_logo.png', height: 200, width: 320),
+                ),
 
                 //message
                 Text(
                   "Let's create an account for you",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 20,
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
 
-                const SizedBox(height: 15),
+                const SizedBox(height: 25),
 
                 // email text field
                 MyTextField(
@@ -97,7 +100,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   obscureText: false,
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 25,
                 ),
 
                 Padding(
@@ -132,7 +135,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 25),
 
                 // Confirm Password text field with eye icon
                 Padding(
@@ -172,7 +175,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
 
                 const SizedBox(
-                  height: 15,
+                  height: 250,
                 ),
 
                 //Register up button

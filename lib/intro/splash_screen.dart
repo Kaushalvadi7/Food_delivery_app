@@ -46,24 +46,29 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/logo.png', // Animated splash
-              width: 200,
-              height: 150,
+              'assets/images/zaikit_logo.png', // Animated splash
+              width: 400,
+              height: 140,
               fit: BoxFit.contain,
             ),
-            const SizedBox(height: 20),
-            Text(
-              "Taste the Best, Forget the Rest!",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            const SizedBox(height: 10),
+            // const SizedBox(height: 20),
+            // Text(
+            //   "Taste the Best, Forget the Rest!",
+            //   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            //     fontWeight: FontWeight.bold,
+            //     color: Theme.of(context).colorScheme.primary,
+            //   ),
+            // ),
+            // const SizedBox(height: 5),
             Text(
               "Delivering happiness at your doorstep!",
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+                textAlign: TextAlign.center,
+
+              // style: Theme.of(context).textTheme.bodyMedium,
+              // textAlign: TextAlign.center,
             ),
           ],
         ),
