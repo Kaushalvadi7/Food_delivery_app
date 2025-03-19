@@ -243,7 +243,7 @@ void _showPaymentDialog(BuildContext context) {
                     ),
                   );
                   NotiService().showNotification(
-                      title: "ZaikIt",
+                      title: "Zaikit",
                       body: "Your Order has been Placed!");
                 });
               },

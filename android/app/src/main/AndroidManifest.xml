@@ -6,6 +6,7 @@
         <meta-data
             android:name="com.google.android.gms.auth.api.credentials.Authorization"
             android:value="true"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -3,6 +3,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:food_delivery_app/components/my_button.dart';
 import 'package:food_delivery_app/pages/delivery_progress_page.dart';
 import 'package:lottie/lottie.dart';
+import '../services/notification_service/noti_service.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -42,7 +43,10 @@ class _PaymentPageState extends State<PaymentPage> {
           TextButton(
             onPressed: () {
               Navigator.pop(context); // Close confirmation dialog
-              showLottieAnimation(); // Show animation and navigate
+              showLottieAnimation();// Show animation and navigate
+              NotiService().showNotification(
+                  title: "ZaikIt",
+                  body: "Your Order has been Placed!");
             },
             child: const Text("Yes"),
           ),
