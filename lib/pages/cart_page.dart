@@ -209,21 +209,21 @@ class _CartPageState extends State<CartPage> {
           ),
         ),
         child: AlertDialog(
-          title: const Text("Select Payment Method", style: TextStyle(color: Colors.white)),
+          title: const Text("Select Payment Method", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                title: const Text("Cash on Delivery", style: TextStyle(color: Colors.white)),
-                leading: const Icon(Icons.money, color: Colors.black),
+                title: const Text("Cash on Delivery", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                leading: const Icon(Icons.money, color: Colors.black,size: 30,),
                 onTap: () {
                   Navigator.pop(context);
                   showLottieAnimation(context, "Cash on Delivery");
                 },
               ),
               ListTile(
-                title: const Text("Payment Gateway", style: TextStyle(color: Colors.white)),
-                leading: const Icon(Icons.credit_card, color: Colors.black),
+                title: const Text("Payment Gateway", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                leading: const Icon(Icons.credit_card, color: Colors.black, size: 30,),
                 onTap: () {
                   Navigator.pop(context);
                   startPayment(totalPrice, deliveryAddress);

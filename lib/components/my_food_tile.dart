@@ -12,86 +12,89 @@ class FoodTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: onTap, // Opens the food details page
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              children: [
-                // Food Image
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(food.imagePath, height: 100, width: 100, fit: BoxFit.cover),
-                ),
-                const SizedBox(width: 15),
-
-                // Food Details
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Food Name
-                      Text(
-                        food.name,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 5),
-
-                      // Food Price
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          '₹${food.price}',
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-
-                      // Short Description
-                      Text(
-                        food.description,
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+    return Padding(
+      padding: const EdgeInsets.all(1.0),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: onTap, // Opens the food details page
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  // Food Image
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(food.imagePath, height: 100, width: 100, fit: BoxFit.cover),
                   ),
-                ),
+                  const SizedBox(width: 15),
 
-                // Add to Cart Button
-                ElevatedButton(
-                  onPressed: () {
-                    if (food.availableAddons.isNotEmpty) {
-                      _showAddonBottomSheet(context, food);
-                    } else {
-                      Provider.of<Restaurant>(context, listen: false).addToCart(food, []);
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  // Food Details
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Food Name
+                        Text(
+                          food.name,
+                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 5),
+
+                        // Food Price
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            '₹${food.price}',
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+
+                        // Short Description
+                        Text(
+                          food.description,
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
-                  child: const Text("Add to Cart", style: TextStyle(color: Colors.white)),
-                ),
-              ],
+
+                  // Add to Cart Button
+                  ElevatedButton(
+                    onPressed: () {
+                      if (food.availableAddons.isNotEmpty) {
+                        _showAddonBottomSheet(context, food);
+                      } else {
+                        Provider.of<Restaurant>(context, listen: false).addToCart(food, []);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    ),
+                    child: const Text("Add to Cart", style: TextStyle(color: Colors.white)),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
 
-        // Improved Divider for Light Mode
-        Divider(
-          color: Colors.grey.shade400, // Adjusted for better visibility
-          thickness: 0.8,
-          indent: 15,
-          endIndent: 15,
-        ),
-      ],
+          // Improved Divider for Light Mode
+          Divider(
+            color: Colors.grey.shade400, // Adjusted for better visibility
+            thickness: 1,
+            indent: 15,
+            endIndent: 15,
+          ),
+        ],
+      ),
     );
   }
 
@@ -108,85 +111,4 @@ class FoodTile extends StatelessWidget {
   }
 }
 
-
-//
-//
-// import 'package:flutter/material.dart';
-// import 'package:food_delivery_app/models/food.dart';
-//
-//  class FoodTile extends StatelessWidget {
-//
-//   final Food food;
-//   final void Function()? onTap;
-//
-//   const FoodTile({super.key,
-//   required this.food,
-//   required this.onTap,  });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         GestureDetector(
-//           onTap: onTap,
-//             child: Padding(
-//               padding: const EdgeInsets.all(15.0),
-//               child: Row(
-//                 children: [
-//                   //food image
-//                   ClipRRect(
-//                       borderRadius: BorderRadius.circular(12),
-//                       child: Image.asset(food.imagePath,height: 150,width: 150,fit: BoxFit.cover)),
-//
-//                   const SizedBox(width: 15,),
-//                   //text food details
-//                   Expanded(child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Text(food.name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface ),),
-//                      //price
-//                       Container(
-//                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-//                         decoration: BoxDecoration(
-//                           color: Theme.of(context).colorScheme.primary,
-//                           borderRadius: BorderRadius.circular(8),
-//                         ),
-//                         child: Text(
-//                           '₹${food.price}',
-//                           style: const TextStyle(
-//                             fontSize: 16,
-//                             fontWeight: FontWeight.w600,
-//                             color: Colors.white,
-//                           ),
-//                         ),
-//                       ),
-//                      const SizedBox(height: 10,),
-//
-//                      //Description
-//                       Text(
-//                         food.description,
-//                         style: TextStyle(
-//                           fontSize: 14,
-//                           color: Theme.of(context).colorScheme.inversePrimary,
-//                         ),
-//                         maxLines: 2, // Prevents long text overflow
-//                         overflow: TextOverflow.ellipsis,
-//                       ),
-//                   ],
-//                   ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//         ),
-//           //divider line
-//           Divider(
-//            color: Theme.of(context).colorScheme.tertiary,
-//             endIndent: 25,
-//             indent: 25,
-//          )
-//       ],
-//     );
-//   }
-// }
 

@@ -67,6 +67,12 @@ class _AddonSelectionBottomSheetState extends State<AddonSelectionBottomSheet> {
               ],
             ),
             const SizedBox(height: 10),
+            Divider(
+              color: Colors.grey.shade400, // Adjusted for better visibility
+              thickness: 0.6,
+              indent: 5,
+              endIndent: 5,
+            ),
 
             // Add-ons Selection
             Expanded(

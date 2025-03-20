@@ -79,7 +79,7 @@ class _FoodPageState extends State<FoodPage> {
 
     const SizedBox(height: 10,),
     // food description
-    Text(widget.food.description),
+    Text(widget.food.description,style: TextStyle(color: Colors.grey),),
 
     const SizedBox(height: 10,),
     Divider(

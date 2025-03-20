@@ -40,7 +40,7 @@ class AboutUs extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,10 +56,11 @@ class AboutUs extends StatelessWidget {
               Text(
                 "Zaikit is an advanced food delivery platform designed to bring your favorite meals to your doorstep with ease. "
                     "Our platform connects you with the best restaurants, offering a wide range of cuisines to satisfy every craving."
-                    "\nWe understand that food delivery is about more than just convenience—it’s about enjoying fresh, delicious meals on time. "
+                    "\n""\n"
+                    "We understand that food delivery is about more than just convenience—it’s about enjoying fresh, delicious meals on time. "
                     "Our dedicated team works tirelessly to ensure a smooth and satisfying experience, from placing an order to receiving it at your doorstep.",
                 textAlign: TextAlign.justify,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary, fontSize: 16)
               ),
               const SizedBox(height: 15),
 
@@ -73,7 +74,7 @@ class AboutUs extends StatelessWidget {
                 "At Zaikit, our mission is to revolutionize the food delivery experience by offering seamless service, "
                     "real-time tracking, and a user-friendly interface. We prioritize quality, speed, and customer satisfaction in every order.",
                 textAlign: TextAlign.justify,
-                style: Theme.of(context).textTheme.bodyMedium,
+                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary, fontSize: 16)
               ),
               const SizedBox(height: 20),
 
@@ -103,7 +104,7 @@ class AboutUs extends StatelessWidget {
                 onTap: _launchMap,
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               // Footer
               Center(
                 child: Text(
@@ -115,6 +116,29 @@ class AboutUs extends StatelessWidget {
                   ),
                 ),
               ),
+              // Social Media Links
+              const SizedBox(height: 15),
+              Center(
+                child: Text(
+                  "Follow Us",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.facebook, color: Colors.blue),
+                    onPressed: () => launchUrl(Uri.parse("https://www.facebook.com/")),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.link, color: Colors.blueAccent),
+                    onPressed: () => launchUrl(Uri.parse("https://www.twitter.com/")),
+                  ),
+                ],
+              ),
+
             ],
           ),
         ),

@@ -45,11 +45,11 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Order Progress",
-          style: TextStyle(color: Colors.grey),
+          "Order Receipt",
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: IconButton(
             onPressed: () {
               Provider.of<Restaurant>(context, listen: false).clearCart();
