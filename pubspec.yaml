@@ -30,6 +30,7 @@ dependencies:
   permission_handler: ^11.4.0
   open_file: ^3.5.10
   flutter_local_notifications: ^19.0.0
+  razorpay_flutter: 1.4.0
   
 
 
@@ -53,9 +54,9 @@ flutter:
     - assets/images/Sides/
     - assets/images/Drinks/
     - assets/animation/
-    - assets/images/logo.png
+    - assets/images/zaikit_logo.png
     - assets/images/google.png
-    - assets/images/zaikit.jpg
+    - assets/images/
     - assets/images/Avatar/
 
 flutter_icons:
@@ -63,3 +64,5 @@ flutter_icons:
   ios: true
   image_path: "assets/images/ic_launcher.png"
   min_sdk_android: 21
+  remove_alpha_ios: true
+
