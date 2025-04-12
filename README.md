@@ -68,7 +68,7 @@ Zaikit ensures a smooth, user-friendly, and efficient food ordering process with
     flutter run
     ```
 
-    Choose your desired target device or emulator.
+   Choose your desired target device or emulator.
 
 ## 🚀 Future Enhancements:
 
