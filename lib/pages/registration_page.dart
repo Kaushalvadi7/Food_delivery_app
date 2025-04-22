@@ -70,15 +70,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // App logo
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: 89.0, bottom: 24),
                   child: Image.asset('assets/images/zaikit_logo.png', height: 200, width: 320),
                 ),
 
@@ -175,7 +173,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
 
                 const SizedBox(
-                  height: 250,
+                  height: 30,
                 ),
 
                 //Register up button
@@ -213,7 +211,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ],
             ),
           ),
-        ),
       ),
     );
   }

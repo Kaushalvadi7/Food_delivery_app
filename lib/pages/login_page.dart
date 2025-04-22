@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/components/my_button.dart';
 import 'package:food_delivery_app/components/my_textfield.dart';
 import 'package:food_delivery_app/pages/profile_creation_page.dart';
+import '../components/forgot_password_page.dart';
 import '../services/auth/auth_service.dart';
 import 'home_page.dart';
 
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             //logo
             Padding(
-              padding: const EdgeInsets.only(top: 89.0),
+              padding: const EdgeInsets.only(top: 142.0),
               child: Image.asset('assets/images/zaikit_logo.png', height: 200, width: 320),
             ),
             const SizedBox(height: 25),
@@ -116,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),),
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 24),
 
             // email text field
             MyTextField(
@@ -157,8 +158,31 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+            const SizedBox(height: 14),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return ForgotPasswordPage();
+                    }));
+                  },
+                  child: Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
 
-            const SizedBox(height: 220,),
+
+            const SizedBox(height: 20,),
 
             //sign in button
             MyButton(
