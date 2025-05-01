@@ -34,47 +34,45 @@ class _CartPageState extends State<CartPage> {
       final userCart = restaurant.cart;
 
       // calculate total price dynamically
-      double totalPrice = userCart.fold(
-          0, (sum, cartItem) => sum + cartItem.totalPrice);
+      double totalPrice =
+          userCart.fold(0, (sum, cartItem) => sum + cartItem.totalPrice);
       //Scaffold UI
       return Scaffold(
         appBar: AppBar(
-          title: const Text("Cart",
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold
-            ),),
+          title: const Text(
+            "Cart",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
           centerTitle: true,
-          backgroundColor: Theme
-              .of(context)
-              .colorScheme
-              .primary,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 2,
-          foregroundColor: Theme
-              .of(context)
-              .colorScheme
-              .inversePrimary,
+          foregroundColor: Theme.of(context).colorScheme.inversePrimary,
           actions: [
             //clear cart button
-            IconButton(onPressed: () {
-              showDialog(context: context,
-                  builder: (context) =>
-                      AlertDialog(
-                        title: const Text(
-                            "Are you sure you want to clear the cart?"),
-                        actions: [
-                          //cancel button
-                          TextButton(onPressed: () => Navigator.pop(context),
-                            child: const Text("Cancel"),),
-                          //yes button
-                          TextButton(onPressed: () {
-                            Navigator.pop(context);
-                            restaurant.clearCart();
-                          },
-                            child: const Text("Yes"),),
-                        ],
-                      ));
-            },
+            IconButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: const Text(
+                                "Are you sure you want to clear the cart?"),
+                            actions: [
+                              //cancel button
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text("Cancel"),
+                              ),
+                              //yes button
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  restaurant.clearCart();
+                                },
+                                child: const Text("Yes"),
+                              ),
+                            ],
+                          ));
+                },
                 icon: const Icon(Icons.delete))
           ],
           leading: IconButton(
@@ -82,11 +80,10 @@ class _CartPageState extends State<CartPage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HomePage()));
               },
-              icon: Icon(Icons.arrow_back_ios,
-                color: Theme
-                    .of(context)
-                    .colorScheme
-                    .inversePrimary,)),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Theme.of(context).colorScheme.inversePrimary,
+              )),
         ),
         body: Column(
           children: [
@@ -94,26 +91,29 @@ class _CartPageState extends State<CartPage> {
             Expanded(
               child: Column(
                 children: [
-                  userCart.isEmpty ? const Expanded(
-                    child: Center(child: Text("Cart is Empty..",
-                      style: TextStyle(fontSize: 30,
-                          color: Colors.grey),
-                    ),
-                    ),
-                  )
-                      : Expanded(child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: ListView.builder(
-                        itemCount: userCart.length,
-                        itemBuilder: (context, index) {
-                          //get individual cart item
-                          final cartItem = userCart[index];
+                  userCart.isEmpty
+                      ? const Expanded(
+                          child: Center(
+                            child: Text(
+                              "Cart is Empty..",
+                              style:
+                                  TextStyle(fontSize: 30, color: Colors.grey),
+                            ),
+                          ),
+                        )
+                      : Expanded(
+                          child: Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: ListView.builder(
+                              itemCount: userCart.length,
+                              itemBuilder: (context, index) {
+                                //get individual cart item
+                                final cartItem = userCart[index];
 
-                          //return cart tile ui
-                          return MyCartTile(cartItem: cartItem);
-                        }
-                    ),
-                  ))
+                                //return cart tile ui
+                                return MyCartTile(cartItem: cartItem);
+                              }),
+                        ))
                 ],
               ),
             ),
@@ -121,24 +121,21 @@ class _CartPageState extends State<CartPage> {
             // Total Price
             totalPrice > 0
                 ? Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Total Price : Rs ${totalPrice.toStringAsFixed(2)}",
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-            )
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      "Total Price : Rs ${totalPrice.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  )
                 : SizedBox(),
 
             // button to pay
             SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.92,
+              width: MediaQuery.of(context).size.width * 0.92,
               height: 62, // Fixed height
               child: ElevatedButton(
                 onPressed: () {
@@ -165,7 +162,7 @@ class _CartPageState extends State<CartPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const HomePage()),
-                            (route) => false, // Remove all previous routes
+                        (route) => false, // Remove all previous routes
                       );
                     });
                   } else {
@@ -183,7 +180,8 @@ class _CartPageState extends State<CartPage> {
                 ),
                 child: const Text(
                   "Go to checkout",
-                  style: TextStyle(color: Colors.white,
+                  style: TextStyle(
+                      color: Colors.white,
                       fontWeight: FontWeight.w500,
                       fontSize: 25),
                 ),
@@ -199,31 +197,52 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-  void _showPaymentDialog(BuildContext context, double totalPrice, String deliveryAddress) {
+  void _showPaymentDialog(
+      BuildContext context, double totalPrice, String deliveryAddress) {
     showDialog(
       context: context,
       builder: (context) => Theme(
         data: Theme.of(context).copyWith(
-          dialogTheme: const DialogTheme(
+          dialogTheme: const DialogThemeData(
             backgroundColor: Color.fromARGB(255, 233, 174, 91),
           ),
         ),
         child: AlertDialog(
-          title: const Text("Select Payment Method", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,)),
+          title: const Text("Select Payment Method",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              )),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                title: const Text("Cash on Delivery", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-                leading: const Icon(Icons.money, color: Colors.black,size: 30,),
+                title: const Text("Cash on Delivery",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20)),
+                leading: const Icon(
+                  Icons.money,
+                  color: Colors.black,
+                  size: 30,
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   showLottieAnimation(context, "Cash on Delivery");
                 },
               ),
               ListTile(
-                title: const Text("Payment Gateway", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-                leading: const Icon(Icons.credit_card, color: Colors.black, size: 30,),
+                title: const Text("Payment Gateway",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20)),
+                leading: const Icon(
+                  Icons.credit_card,
+                  color: Colors.black,
+                  size: 30,
+                ),
                 onTap: () {
                   Navigator.pop(context);
                   startPayment(totalPrice, deliveryAddress);
@@ -243,10 +262,7 @@ class _CartPageState extends State<CartPage> {
       'name': 'Zaikit',
       'description': 'Food Order Payment',
       'timeout': 60,
-      'prefill': {
-        'contact': '9898987777',
-        'email': 'kaushal77@example.com'
-      },
+      'prefill': {'contact': '9898987777', 'email': 'kaushal77@example.com'},
       'notes': {
         'Delivery Address': deliveryAddress,
       }
@@ -266,11 +282,11 @@ class _CartPageState extends State<CartPage> {
         builder: (context) => DeliveryProgressPage(paymentMethod: "RazorPay"),
       ),
     );
-    NotiService().showNotification(title: "Zaikit", body: "Your Order has been Placed!");
+    NotiService()
+        .showNotification(title: "Zaikit", body: "Your Order has been Placed!");
   }
 
-  void _handlePaymentError(PaymentFailureResponse response) {
-  }
+  void _handlePaymentError(PaymentFailureResponse response) {}
 
   void showLottieAnimation(BuildContext context, String paymentMethod) {
     showDialog(
@@ -293,16 +309,21 @@ class _CartPageState extends State<CartPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DeliveryProgressPage(paymentMethod: paymentMethod),
+                      builder: (context) =>
+                          DeliveryProgressPage(paymentMethod: paymentMethod),
                     ),
                   );
-                  NotiService().showNotification(title: "Zaikit", body: "Your Order has been Placed!");
+                  NotiService().showNotification(
+                      title: "Zaikit", body: "Your Order has been Placed!");
                 });
               },
             ),
             const SizedBox(height: 10),
             const Text("Processing your payment...",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey)),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey)),
           ],
         ),
       ),
@@ -319,9 +340,3 @@ class _CartPageState extends State<CartPage> {
     super.dispose();
   }
 }
-
-
-
-
-
-
